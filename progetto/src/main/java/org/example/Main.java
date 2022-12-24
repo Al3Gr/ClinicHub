@@ -7,4 +7,8 @@ public class Main {
 
     public void metodo() {
     }
+
+    public void prova(){
+
+    }
 }
