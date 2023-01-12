@@ -1,5 +1,5 @@
 public class HospitalizationFactory {
-    public Hospitalization getNewHospitalization(String mode, Operation operation){
+    public static Hospitalization getNewHospitalization(String mode, Operation operation){
 
     }
 }
