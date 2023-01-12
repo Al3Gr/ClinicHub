@@ -27,7 +27,7 @@ public class ClinicHub {
     public float calculatePrice(){
 
     }
-    publict void confirmHospitalization(){
+    public void confirmHospitalization(){
 
     }
     private void ClinicHub(){
