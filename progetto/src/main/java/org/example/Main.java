@@ -5,6 +5,5 @@ public class Main {
         System.out.println("Ciao mondo");
     }
 
-    public void metodo() {
-    }
+
 }
