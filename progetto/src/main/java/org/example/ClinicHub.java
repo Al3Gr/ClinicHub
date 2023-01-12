@@ -17,6 +17,7 @@ public class ClinicHub {
     }
 
     public Patient checkPatient(String cf){
+
         return null;
     }
     public void addPatient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail){
