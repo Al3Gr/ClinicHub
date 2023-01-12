@@ -1,3 +1,7 @@
+package org.example;
+
+import java.util.Date;
+
 public abstract class Hospitalization{
     private float price;
     private Date start_date;
