@@ -1,4 +1,4 @@
 public enum Operation {
-    public float price;
-    public Time convalescence;
+    private float price;
+    private Time convalescence;
 }

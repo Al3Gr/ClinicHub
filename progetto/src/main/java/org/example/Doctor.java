@@ -1,8 +1,8 @@
 public class Doctor {
-    public String name;
-    public String lastname;
-    public Date birthday;
-    public String cf;
-    public String e-mail;
-    public String telephone;
+    private String name;
+    private String lastname;
+    private Date birthday;
+    private String cf;
+    private String e-mail;
+    private String telephone;
 }

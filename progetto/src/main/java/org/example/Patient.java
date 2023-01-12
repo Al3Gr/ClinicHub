@@ -1,9 +1,9 @@
 public class Patient {
-    public String name;
-    public String lastname;
-    public Date birthday;
-    public String residence;
-    public String cf;
-    public String telephone;
-    public String e-mail;
+    private String name;
+    private String lastname;
+    private Date birthday;
+    private String residence;
+    private String cf;
+    private String telephone;
+    private String e-mail;
 }
