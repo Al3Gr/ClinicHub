@@ -22,4 +22,12 @@ public enum Operation {
         this.price = price;
         this.convalescence = convalescence;
     }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public int getConvalescence() {
+        return convalescence;
+    }
 }
