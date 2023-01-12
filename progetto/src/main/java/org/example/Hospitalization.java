@@ -3,4 +3,7 @@ public abstract class Hospitalization{
     public Date start_date;
     public int code;
     public Date end_date;
+    public void setData(Date data){
+
+    }
 }
