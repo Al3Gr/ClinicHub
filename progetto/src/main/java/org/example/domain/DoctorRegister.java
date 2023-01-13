@@ -1,6 +1,5 @@
-package org.example;
+package org.example.domain;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;

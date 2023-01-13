@@ -1,7 +1,6 @@
-package org.example;
+package org.example.domain;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 
 public abstract class Hospitalization{

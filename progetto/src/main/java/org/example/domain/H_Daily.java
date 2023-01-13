@@ -1,7 +1,6 @@
-package org.example;
+package org.example.domain;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class H_Daily extends Hospitalization{
 
