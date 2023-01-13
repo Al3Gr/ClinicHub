@@ -2,11 +2,17 @@ package org.example;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClinicHub {
 
     private static ClinicHub clinicHub;
+    private Map<String, Patient> patientRegister;
+
+    private Patient currentPatient;
+    private DoctorRegister doctorRegister;
 
     // Pattern Singleton
     public static ClinicHub getInstance(){
@@ -17,8 +23,14 @@ public class ClinicHub {
     }
 
     public Patient checkPatient(String cf){
-
-        return null;
+        Patient p = patientRegister.get(cf);
+        if(p == null) {
+            currentPatient = new Patient();
+            return null;
+        } else {
+            currentPatient = p;
+            return p;
+        }
     }
     public void addPatient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail){
 
@@ -45,7 +57,8 @@ public class ClinicHub {
 
     }
     private void ClinicHub(){
-
+        patientRegister = new HashMap<>();
+        doctorRegister = new DoctorRegister();
     }
     private List<Date> getAvailableDates(){
         return null;
