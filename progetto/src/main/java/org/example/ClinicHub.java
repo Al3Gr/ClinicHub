@@ -10,6 +10,7 @@ public class ClinicHub {
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private DoctorRegister doctorRegister;
+    private Map<Integer,Hospitalization> hospRegister; //VEDI
 
     // Pattern Singleton
     public static ClinicHub getInstance(){
@@ -53,14 +54,19 @@ public class ClinicHub {
         }
     }
     public float calculatePrice(){
-        return 0;
+        return currentHosp.getPrice();
     }
     public void confirmHospitalization(){
-
+        currentHosp.setPatient(currentPatient);
+        Doctor m= doctorRegister.getDoctor();
+        currentHosp.setDoctor(m);
+        int cod=currentHosp.getCode();
+        hospRegister.put(cod,currentHosp); //VEDI
     }
     private void ClinicHub(){
         patientRegister = new HashMap<>();
         doctorRegister = new DoctorRegister();
+        hospRegister = new HashMap<>(); //VEDI
     }
     private List<Date> getAvailableDates(){
         Calendar cal = Calendar.getInstance();
