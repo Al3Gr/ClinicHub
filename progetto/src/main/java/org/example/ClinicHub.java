@@ -33,10 +33,12 @@ public class ClinicHub {
         }
     }
     public void addPatient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail){
-
+        currentPatient = new Patient(name,lastname,birthday,residence,cf,telephone,e_mail);
     }
     public void confirmPatient(){
-
+        if (currentPatient != null) {
+            patientRegister.put(currentPatient.getCf(),currentPatient);
+        }
     }
     public List<Date> newHospitalization(String mode, Operation operation){
         return null;
