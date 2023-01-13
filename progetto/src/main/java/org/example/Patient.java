@@ -11,6 +11,17 @@ public class Patient {
     private String telephone;
     private String e_mail;
 
+
+    public Patient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail) {
+        this.name = name;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.residence = residence;
+        this.cf = cf;
+        this.telephone = telephone;
+        this.e_mail = e_mail;
+    }
+
     public String getName() {
         return name;
     }
