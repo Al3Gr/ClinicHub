@@ -26,6 +26,7 @@ public class ClinicHub {
     public Patient checkPatient(String cf){
         Patient p = patientRegister.get(cf);
         if(p == null) {
+            Patient p = new Patient();
             return null;
         } else {
             currentPatient = p;
