@@ -1,6 +1,5 @@
 package org.example;
 
-
 import java.util.*;
 
 public class ClinicHub {
@@ -48,8 +47,10 @@ public class ClinicHub {
     private void loadPatients(){
 
     }
-    public void chooseHospitalization(Date start_date){
-
+    public void chooseHospitalization(Calendar start_date){
+        if(currentHosp != null) {
+            currentHosp.setData(start_date);
+        }
     }
     public float calculatePrice(){
         return 0;

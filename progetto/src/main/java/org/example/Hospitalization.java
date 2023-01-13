@@ -28,13 +28,9 @@ public abstract class Hospitalization{
         return end_date;
     }
 
-    public void setPatient(Patient p) {
-        patient = p;
-    }
+    public void setPatient(Patient p) { patient = p; }
 
-    public void setDoctor(Doctor d) {
-        doctor = d;
-    }
+    public void setDoctor(Doctor d) { doctor = d; }
 
     public Hospitalization(Operation op) {
         this.op = op;
