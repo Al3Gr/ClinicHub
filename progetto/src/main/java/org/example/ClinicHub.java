@@ -1,10 +1,7 @@
 package org.example;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClinicHub {
 
@@ -65,6 +62,12 @@ public class ClinicHub {
         doctorRegister = new DoctorRegister();
     }
     private List<Date> getAvailableDates(){
-        return null;
+        Calendar cal = Calendar.getInstance();
+        ArrayList<Date> dates = new ArrayList<>();
+        for(int i = 0; i <= 30; i++) {
+            cal.add(Calendar.DAY_OF_MONTH, i);
+            dates.add(cal.getTime());
+        }
+        return dates;
     }
 }
