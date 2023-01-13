@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public abstract class Hospitalization{
     protected float price;
@@ -28,5 +29,6 @@ public abstract class Hospitalization{
 
     public Hospitalization(Operation op) {
         this.op = op;
+        this.code = new Random().nextInt();
     }
 }

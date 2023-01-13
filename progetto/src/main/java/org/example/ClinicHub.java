@@ -12,6 +12,7 @@ public class ClinicHub {
     private Map<String, Patient> patientRegister;
 
     private Patient currentPatient;
+    private Hospitalization currentHosp;
     private DoctorRegister doctorRegister;
 
     // Pattern Singleton
@@ -40,7 +41,9 @@ public class ClinicHub {
         }
     }
     public List<Date> newHospitalization(String mode, Operation operation){
-        return null;
+        currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
+        List<Date> dates = getAvailableDates();
+        return dates;
     }
     private void loadDoctors(){
 
