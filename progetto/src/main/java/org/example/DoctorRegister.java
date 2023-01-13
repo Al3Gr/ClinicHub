@@ -1,12 +1,17 @@
 package org.example;
 
+import javax.print.Doc;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 public class DoctorRegister {
 
     private Map<String, Doctor> register;
     public Doctor getDoctor(){
-        return null;
+        int i = new Random().nextInt(register.size());
+        Doctor doc = new ArrayList<Doctor>(register.values()).get(i);
+        return doc;
     }
 
     public void addDoctor(Doctor doc){
