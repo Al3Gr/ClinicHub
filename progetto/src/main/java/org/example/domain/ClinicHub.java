@@ -78,8 +78,8 @@ public class ClinicHub {
     }
 
     private void loadPatients(){
-        Patient p1 = new Patient("Carlo", "Bianchi", new Date(), "cf2", "ca.bianchi@gmail.com", "3331112222");
-        Patient p2 = new Patient("Marco", "Rossi", new Date(), "cf3", "mar.rss@gmail.com", "3444444555");
+        Patient p1 = new Patient("Carlo", "Bianchi", new Date(), "via S.Carlo 1", "cf2", "3331112222", "ca.bianchi@gmail.com");
+        Patient p2 = new Patient("Marco", "Rossi", new Date(), "via S.Marco 2", "cf3", "3444444555", "mar.rss@gmail.com");
         patientRegister.put(p1.getCf(),p1);
         patientRegister.put(p2.getCf(),p2);
         System.out.println("Caricamento pazienti completato");
