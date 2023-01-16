@@ -74,23 +74,38 @@ public class ClinicHub {
     }
 
     private void loadPatients(){
-
+        Patient p1 = new Patient("Carlo", "Bianchi", new Date(), "cf2", "ca.bianchi@gmail.com", "3331112222");
+        Patient p2 = new Patient("Marco", "Rossi", new Date(), "cf3", "mar.rss@gmail.com", "3444444555");
+        patientRegister.put(p1.getCf(),p1);
+        patientRegister.put(p2.getCf(),p2);
+        System.out.println("Caricamento pazienti completato");
     }
 
-    public void chooseHospitalization(Calendar start_date){
+    public void chooseHospitalization(Calendar start_date) throws Exception{
         if(currentHosp != null) {
             currentHosp.setData(start_date);
+        } else {
+        throw new Exception("Ordine chiamata metodi non rispettato");
         }
     }
     public float calculatePrice(){
         return currentHosp.getPrice();
     }
-    public void confirmHospitalization(){
-        currentHosp.setPatient(currentPatient);
-        Doctor m= doctorRegister.getDoctor();
-        currentHosp.setDoctor(m);
-        int cod=currentHosp.getCode();
-        hospRegister.put(cod,currentHosp);
+
+    public void confirmHospitalization() throws Exception {
+        if (currentHosp != null && currentPatient != null) {
+            currentHosp.setPatient(currentPatient);
+            try {
+                Doctor m = doctorRegister.getDoctor();
+                currentHosp.setDoctor(m);
+                int cod=currentHosp.getCode();
+                hospRegister.put(cod,currentHosp);
+            } catch(Exception e) {
+                System.out.println("Nessun paziente presente");
+            }
+        } else {
+            throw new Exception("Ordine chiamata dei metodi errato");
+        }
     }
     private ClinicHub(){
         this.patientRegister = new HashMap<>();

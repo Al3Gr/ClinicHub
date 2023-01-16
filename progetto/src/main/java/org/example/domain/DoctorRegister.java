@@ -7,10 +7,14 @@ import java.util.Random;
 public class DoctorRegister {
 
     private Map<String, Doctor> register;
-    public Doctor getDoctor(){
-        int i = new Random().nextInt(register.size());
-        Doctor doc = new ArrayList<Doctor>(register.values()).get(i);
-        return doc;
+    public Doctor getDoctor() throws Exception {
+        if (register.size() > 0) {
+            int i = new Random().nextInt(register.size());
+            Doctor doc = new ArrayList<Doctor>(register.values()).get(i);
+            return doc;
+        } else {
+            throw new Exception("Nessun dottore presente");
+        }
     }
 
     public void addDoctor(Doctor doc){
