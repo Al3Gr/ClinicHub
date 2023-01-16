@@ -60,10 +60,14 @@ public class ClinicHub {
             throw new Exception("Ordine chiamata metodi non rispettato");
         }
     }
-    public List<Date> newHospitalization(String mode, Operation operation){
-        currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
-        List<Date> dates = getAvailableDates();
-        return dates;
+    public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
+        if (currentHosp == null) {
+            currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
+            List<Date> dates = getAvailableDates();
+            return dates;
+        } else {
+            throw new Exception("Ordine chiamata metodi errato");
+        }
     }
     private void loadDoctors(){
         Doctor d1 = new Doctor("Damiano", "Gr", new Date(), "cf0", "da.gr@gmail.com", "000111222");
@@ -81,15 +85,19 @@ public class ClinicHub {
         System.out.println("Caricamento pazienti completato");
     }
 
-    public void chooseHospitalization(Calendar start_date) throws Exception{
+    public void chooseHospitalization(Calendar start_date) throws Exception {
         if(currentHosp != null) {
             currentHosp.setData(start_date);
         } else {
         throw new Exception("Ordine chiamata metodi non rispettato");
         }
     }
-    public float calculatePrice(){
-        return currentHosp.getPrice();
+    public float calculatePrice() throws Exception {
+        if (currentHosp != null) {
+            return currentHosp.getPrice();
+        } else {
+            throw new Exception("Ordine chiamata metodi non rispettato");
+        }
     }
 
     public void confirmHospitalization() throws Exception {
