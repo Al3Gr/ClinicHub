@@ -49,7 +49,16 @@ class ClinicHubTest {
     }
 
     @Test
-    void newHospitalization() {
+    void testNewHospitalization() {
+        try{
+            ArrayList<Date> dates = clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            assertNotNull(clinicHub.getCurrentHosp());
+            assertNotNull(dates);
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
+
+
     }
 
     @Test

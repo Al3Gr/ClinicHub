@@ -20,6 +20,10 @@ public class ClinicHub {
         return currentPatient;
     }
 
+    public Hospitalization getCurrentHosp() {
+        return currentHosp;
+    }
+
     // Pattern Singleton
     public static ClinicHub getInstance(){
         if(clinicHub == null){
