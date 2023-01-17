@@ -1,18 +1,19 @@
 package org.example.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Patient {
     private String name;
     private String lastname;
-    private Date birthday;
+    private LocalDate birthday;
     private String residence;
     private String cf;
     private String telephone;
     private String e_mail;
 
 
-    public Patient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail) {
+    public Patient(String name, String lastname, LocalDate birthday, String residence, String cf, String telephone, String e_mail) {
         this.name = name;
         this.lastname = lastname;
         this.birthday = birthday;
@@ -38,11 +39,11 @@ public class Patient {
         this.lastname = lastname;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -76,5 +77,18 @@ public class Patient {
 
     public void setE_mail(String e_mail) {
         this.e_mail = e_mail;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", birthday=" + birthday +
+                ", residence='" + residence + '\'' +
+                ", cf='" + cf + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", e_mail='" + e_mail + '\'' +
+                '}';
     }
 }

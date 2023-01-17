@@ -45,7 +45,9 @@
           <component id="74f5a" class="javax.swing.JTextField" binding="nameField">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="25"/>
                 <preferred-size width="150" height="25"/>
+                <maximum-size width="-1" height="25"/>
               </grid>
             </constraints>
             <properties/>
@@ -159,13 +161,13 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="54179" class="javax.swing.JButton" binding="clrCancel">
+          <component id="54179" class="javax.swing.JButton" binding="cnlCancel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-12514041"/>
-              <text value="Clear"/>
+              <text value="Annulla"/>
             </properties>
           </component>
           <component id="874e" class="javax.swing.JButton" binding="btnConfirm">

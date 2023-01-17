@@ -3,6 +3,7 @@ package org.example.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +23,7 @@ class ClinicHubTest {
     @Test
     void testAddPatient() {
         try {
-            clinicHub.addPatient("Alessandro", "Gr", new Date(), "via mario rossi 10", "cf23(", "000111555", "prova@gmail.com");
+            clinicHub.addPatient("Alessandro", "Gr", LocalDate.now(), "via mario rossi 10", "cf23(", "000111555", "prova@gmail.com");
             assertNotNull(clinicHub.getCurrentPatient());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -32,7 +33,7 @@ class ClinicHubTest {
     @Test
     void testConfirmPatient() {
         try {
-            clinicHub.addPatient("Alessandro", "Gr", new Date(), "via mario rossi 10", "cf22", "000111555", "prova@gmail.com");
+            clinicHub.addPatient("Alessandro", "Gr", LocalDate.now(), "via mario rossi 10", "cf22", "000111555", "prova@gmail.com");
             clinicHub.confirmPatient();
             assertEquals(3, clinicHub.getPatientRegister().size());
         } catch (Exception e) {
