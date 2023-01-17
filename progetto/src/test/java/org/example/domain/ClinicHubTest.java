@@ -40,7 +40,12 @@ class ClinicHubTest {
 
     @Test
     void testLoginPatient() {
-
+        try{
+            clinicHub.loginPatient("cf2");
+            assertNotNull(clinicHub.getCurrentPatient);
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test
