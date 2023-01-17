@@ -24,6 +24,10 @@ public class ClinicHub {
         return currentHosp;
     }
 
+    public Map<Integer, Hospitalization> getHospRegister() {
+        return hospRegister;
+    }
+
     // Pattern Singleton
     public static ClinicHub getInstance(){
         if(clinicHub == null){
@@ -65,14 +69,13 @@ public class ClinicHub {
         }
     }
     public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
-        if (currentHosp == null) {
+
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
             List<Date> dates = getAvailableDates();
             return dates;
-        } else {
-            throw new Exception("Ordine chiamata metodi errato");
-        }
+
     }
+
     private void loadDoctors(){
         Doctor d1 = new Doctor("Damiano", "Gr", new Date(), "cf0", "da.gr@gmail.com", "000111222");
         Doctor d2 = new Doctor("Eleonora", "Fd", new Date(), "cf1", "el.fg@gmail.com", "333444555");
@@ -96,6 +99,7 @@ public class ClinicHub {
         throw new Exception("Ordine chiamata metodi non rispettato");
         }
     }
+
     public float calculatePrice() throws Exception {
         if (currentHosp != null) {
             return currentHosp.getPrice();
@@ -119,11 +123,15 @@ public class ClinicHub {
             throw new Exception("Ordine chiamata dei metodi errato");
         }
     }
+
+
+
     private ClinicHub(){
         this.patientRegister = new HashMap<>();
-        this.doctorRegister = new DoctorRegister();
+        this.doctorRegister = DoctorRegister.getInstance();
         this.hospRegister = new HashMap<>();
         this.loadPatients();
+        this.loadDoctors();
     }
     private List<Date> getAvailableDates(){
         Calendar cal = Calendar.getInstance();
