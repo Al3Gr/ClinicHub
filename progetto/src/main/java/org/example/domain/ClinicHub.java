@@ -119,6 +119,7 @@ public class ClinicHub {
         this.patientRegister = new HashMap<>();
         this.doctorRegister = new DoctorRegister();
         this.hospRegister = new HashMap<>();
+        this.loadPatients();
     }
     private List<Date> getAvailableDates(){
         Calendar cal = Calendar.getInstance();

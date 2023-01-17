@@ -20,7 +20,7 @@ class ClinicHubTest {
     @Test
     void testAddPatient() {
         try {
-            clinicHub.addPatient("Alessandro", "Gr", new Date(), "via mario rossi 10", "cf23", "000111555", "prova@gmail.com");
+            clinicHub.addPatient("Alessandro", "Gr", new Date(), "via mario rossi 10", "cf23(", "000111555", "prova@gmail.com");
             assertNotNull(clinicHub.getCurrentPatient());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -42,7 +42,7 @@ class ClinicHubTest {
     void testLoginPatient() {
         try{
             clinicHub.loginPatient("cf2");
-            assertNotNull(clinicHub.getCurrentPatient);
+            assertNotNull(clinicHub.getCurrentPatient());
         } catch (Exception e) {
             fail("Unexpected exception");
         }
