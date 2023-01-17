@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,15 +60,31 @@ class ClinicHubTest {
             fail("Unexpected exception");
         }
 
-
     }
 
     @Test
     void testChooseHospitalization() {
+        try {
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(Calendar.getInstance());
+            assertEquals(Calendar.getInstance(), clinicHub.getCurrentHosp().getStart_date());
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test
     void testCalculatePrice() {
+        try{
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(Calendar.getInstance());
+            assertEquals(100, clinicHub.calculatePrice());
+            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(Calendar.getInstance());
+            assertEquals(400, clinicHub.calculatePrice());
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test
