@@ -68,10 +68,13 @@ public class ClinicHub {
         }
     }
     public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
-
+        if(currentPatient != null){
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
             List<Date> dates = getAvailableDates();
             return dates;
+        } else {
+            throw new Exception();
+        }
 
     }
 

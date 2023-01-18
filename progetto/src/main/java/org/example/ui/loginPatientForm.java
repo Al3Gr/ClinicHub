@@ -43,7 +43,7 @@ public class loginPatientForm extends JFrame{
         setContentPane(mainPanel);
         setMinimumSize(new Dimension(550, 500));
         setLocationRelativeTo(parent);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         buttonGroup.add(dailyButton);
         buttonGroup.add(standardButton);
@@ -96,7 +96,7 @@ public class loginPatientForm extends JFrame{
                     }
                     confirmHospFrame(dates);
                 } catch (Exception ex) {
-                    System.out.println("Error");
+                    Utility.alertFrame("Inserire dati!!!");
                 }
             }
         });
@@ -142,6 +142,7 @@ public class loginPatientForm extends JFrame{
         JLabel pricelabel_info = new JLabel("", SwingConstants.LEFT);
         pricelabel_info.setVisible(false);
 
+
         datesCombo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -154,7 +155,7 @@ public class loginPatientForm extends JFrame{
                     pricelabel_info.setVisible(true);
                     endlabel_info.setVisible(true);
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    Utility.alertFrame("Errore sconosciuto");
                 }
             }
         });
@@ -174,8 +175,9 @@ public class loginPatientForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     clinicHub.confirmHospitalization();
+                    frame.dispose();
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    Utility.alertFrame("Errore sconosciuto");
                 }
             }
         });
@@ -199,7 +201,4 @@ public class loginPatientForm extends JFrame{
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new loginPatientForm(null);
-    }
 }

@@ -33,6 +33,10 @@ public class ClinicHubForm extends JFrame {
                 new loginPatientForm(parent);
             }
         });
+
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
