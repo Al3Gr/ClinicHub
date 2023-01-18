@@ -75,14 +75,14 @@ class ClinicHubTest {
     }
 
     @Test
-    void testCalculatePrice() {
+    void testShowPrice() {
         try{
             clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(Calendar.getInstance());
-            assertEquals(100, clinicHub.calculatePrice());
+            assertEquals(100, clinicHub.showPrice());
             clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(Calendar.getInstance());
-            assertEquals(400, clinicHub.calculatePrice());
+            assertEquals(400, clinicHub.showPrice());
         } catch (Exception e) {
             fail("Unexpected exception");
         }

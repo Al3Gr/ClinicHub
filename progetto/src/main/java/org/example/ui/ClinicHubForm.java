@@ -20,13 +20,17 @@ public class ClinicHubForm extends JFrame {
         setTitle("ClinicHub");
         setContentPane(welcomePanel);
         setMinimumSize(new Dimension(510, 720));
-        setLocationRelativeTo(parent);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
+
         btnAddPatient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new addPatientForm(parent);
+            }
+        });
+        btnLoginPatient.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new loginPatientForm(parent);
             }
         });
     }

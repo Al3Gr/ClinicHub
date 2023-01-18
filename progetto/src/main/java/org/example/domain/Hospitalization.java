@@ -13,7 +13,9 @@ public abstract class Hospitalization{
     protected Operation op;
     public abstract void setData(Calendar data);
 
-    public abstract float getPrice();
+    public float getPrice(){
+        return this.price;
+    };
 
     public Calendar getStart_date() {
         return start_date;
@@ -34,5 +36,18 @@ public abstract class Hospitalization{
     public Hospitalization(Operation op) {
         this.op = op;
         this.code = new Random().nextInt();
+    }
+
+    @Override
+    public String toString() {
+        return "Hospitalization{" +
+                "price=" + price +
+                ", start_date=" + start_date +
+                ", code=" + code +
+                ", end_date=" + end_date +
+                ", patient=" + patient +
+                ", doctor=" + doctor +
+                ", op=" + op +
+                '}';
     }
 }

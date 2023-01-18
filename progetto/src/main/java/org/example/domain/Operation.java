@@ -30,4 +30,6 @@ public enum Operation {
     public int getConvalescence() {
         return convalescence;
     }
+
+
 }

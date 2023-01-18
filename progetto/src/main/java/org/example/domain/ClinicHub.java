@@ -99,7 +99,7 @@ public class ClinicHub {
         }
     }
 
-    public float calculatePrice() throws Exception {
+    public float showPrice() throws Exception {
         if (currentHosp != null) {
             return currentHosp.getPrice();
         } else {
@@ -135,10 +135,12 @@ public class ClinicHub {
     private List<Date> getAvailableDates(){
         Calendar cal = Calendar.getInstance();
         ArrayList<Date> dates = new ArrayList<>();
-        for(int i = 0; i <= 30; i++) {
-            cal.add(Calendar.DAY_OF_MONTH, i);
+        dates.add(cal.getTime());
+        for(int i = 1; i <= 30; i++) {
+            cal.add(Calendar.DAY_OF_MONTH, 1);
             dates.add(cal.getTime());
         }
         return dates;
     }
+
 }
