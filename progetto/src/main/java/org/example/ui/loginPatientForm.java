@@ -142,6 +142,9 @@ public class loginPatientForm extends JFrame{
         JLabel pricelabel_info = new JLabel("", SwingConstants.LEFT);
         pricelabel_info.setVisible(false);
 
+        JButton confirmButton = new JButton("Conferma");
+        confirmButton.setVisible(false);
+
 
         datesCombo.addActionListener(new ActionListener() {
             @Override
@@ -154,6 +157,7 @@ public class loginPatientForm extends JFrame{
                     pricelabel_info.setText(String.valueOf(clinicHub.showPrice()));
                     pricelabel_info.setVisible(true);
                     endlabel_info.setVisible(true);
+                    confirmButton.setVisible(true);
                 } catch (Exception ex) {
                     Utility.alertFrame("Errore sconosciuto");
                 }
@@ -169,7 +173,7 @@ public class loginPatientForm extends JFrame{
 
         m_panel.add(dataPanel);
 
-        JButton confirmButton = new JButton("Conferma");
+
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
