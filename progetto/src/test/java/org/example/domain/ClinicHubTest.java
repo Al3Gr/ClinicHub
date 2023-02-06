@@ -67,6 +67,7 @@ class ClinicHubTest {
     @Test
     void testChooseHospitalization() {
         try {
+            clinicHub.loginPatient("cf2");
             clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(Calendar.getInstance());
             assertEquals(Calendar.getInstance(), clinicHub.getCurrentHosp().getStart_date());
@@ -78,6 +79,7 @@ class ClinicHubTest {
     @Test
     void testShowPrice() {
         try{
+            clinicHub.loginPatient("cf2");
             clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(Calendar.getInstance());
             assertEquals(100, clinicHub.showPrice());
