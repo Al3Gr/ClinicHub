@@ -91,4 +91,17 @@ public class Patient {
                 ", e_mail='" + e_mail + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+        final Patient p = (Patient) obj;
+        if(this.cf == p.cf){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
