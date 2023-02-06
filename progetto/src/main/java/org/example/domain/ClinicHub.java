@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class ClinicHub {
@@ -47,12 +48,11 @@ public class ClinicHub {
         return true;
     }
 
-    public boolean addPatient(String name, String lastname, Date birthday, String residence, String cf, String telephone, String e_mail) throws Exception {
+    public boolean addPatient(String name, String lastname, LocalDate birthday, String residence, String cf, String telephone, String e_mail) throws Exception {
         Patient p = patientRegister.get(cf);
         if(p == null) {
             currentPatient = new Patient(name, lastname, birthday, residence, cf, telephone, e_mail);
         } else {
-            System.out.println("Paziente già presente");
             throw new Exception("Paziente già registrato");
         }
         return true;
@@ -62,17 +62,19 @@ public class ClinicHub {
 
     public void confirmPatient() throws Exception {
         if (currentPatient != null) {
-            System.out.println(currentPatient);
             patientRegister.put(currentPatient.getCf(),currentPatient);
         } else {
             throw new Exception("Ordine chiamata metodi non rispettato");
         }
     }
     public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
-
+        if(currentPatient != null){
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
             List<Date> dates = getAvailableDates();
             return dates;
+        } else {
+            throw new Exception();
+        }
 
     }
 
@@ -85,8 +87,8 @@ public class ClinicHub {
     }
 
     private void loadPatients(){
-        Patient p1 = new Patient("Carlo", "Bianchi", new Date(), "via S.Carlo 1", "cf2", "3331112222", "ca.bianchi@gmail.com");
-        Patient p2 = new Patient("Marco", "Rossi", new Date(), "via S.Marco 2", "cf3", "3444444555", "mar.rss@gmail.com");
+        Patient p1 = new Patient("Carlo", "Bianchi", LocalDate.now(), "via S.Carlo 1", "cf2", "3331112222", "ca.bianchi@gmail.com");
+        Patient p2 = new Patient("Marco", "Rossi", LocalDate.now(), "via S.Marco 2", "cf3", "3444444555", "mar.rss@gmail.com");
         patientRegister.put(p1.getCf(),p1);
         patientRegister.put(p2.getCf(),p2);
         System.out.println("Caricamento pazienti completato");
@@ -100,7 +102,7 @@ public class ClinicHub {
         }
     }
 
-    public float calculatePrice() throws Exception {
+    public float showPrice() throws Exception {
         if (currentHosp != null) {
             return currentHosp.getPrice();
         } else {
@@ -136,10 +138,12 @@ public class ClinicHub {
     private List<Date> getAvailableDates(){
         Calendar cal = Calendar.getInstance();
         ArrayList<Date> dates = new ArrayList<>();
-        for(int i = 0; i <= 30; i++) {
-            cal.add(Calendar.DAY_OF_MONTH, i);
+        dates.add(cal.getTime());
+        for(int i = 1; i <= 30; i++) {
+            cal.add(Calendar.DAY_OF_MONTH, 1);
             dates.add(cal.getTime());
         }
         return dates;
     }
+
 }

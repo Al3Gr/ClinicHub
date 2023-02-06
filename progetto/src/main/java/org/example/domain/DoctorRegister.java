@@ -35,4 +35,6 @@ public class DoctorRegister {
     public void addDoctor(Doctor doc){
         register.put(doc.getCf(), doc);
     }
+
+    public int getSize() { return register.size(); }
 }
