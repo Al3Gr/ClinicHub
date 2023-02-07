@@ -8,7 +8,7 @@ public enum ExamType {
     ELECTROMYOGRAPHY(50,8),
     ELECTROENCEPHALOGRAPHY(50,7);
     private float price;
-    private int daysToReady; //voi avete messo Time, io ho messo questo
+    private int daysToReady;
     ExamType(float price, int daysToReady) {
         this.price = price;
         this.daysToReady = daysToReady;
