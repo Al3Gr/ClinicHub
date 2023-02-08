@@ -37,4 +37,7 @@ public class DoctorRegister {
     }
 
     public int getSize() { return register.size(); }
+    public Doctor getDoctorByLastname(String lastname){
+        return null; //COME LO CERCHIAMO?
+    }
 }

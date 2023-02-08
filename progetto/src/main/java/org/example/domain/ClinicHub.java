@@ -137,15 +137,72 @@ public class ClinicHub {
         this.loadPatients();
         this.loadDoctors();
     }
-
-
-    public List<Date> newExamBooking(ExamType examType){
-        return null;
+    public void chooseDoctor(String lastname){
+        Doctor d=doctorRegister.getDoctorByLastname(lastname); //SISTEMA IL METODO GETDOCTOR
+        currentExam.setDoctor(d);
+        //currentExam.setprice() ??? VEDI COSA FARE
     }
-    public List<Time> chooseExamDate(Date date){return null;}
-    public Date chooseExamTime(Time time){return null;}
-    public float showExamPrice(){return 0;}
-    public void confirmBooking(){}
-    public float calculateRefund(String tipologia){return 0;}
-    public void confirmCancel(String tipologia){}
+    public List<Date> newExamBooking(ExamType examType){
+        currentExam=new Exam(examType);
+        List<Date> dates = Utility.getDates();
+        return dates;
+    }
+    public List<Time> chooseExamDate(Calendar date){
+         currentExam.setData(date);
+         List<Time> times=Utility.getTimes();
+         return times;
+    }
+    public Calendar chooseExamTime(Time time){
+        currentExam.setTime(time);
+        return currentExam.getReadyDate();
+    }
+    public float showExamPrice(){ return currentExam.getPrice();}
+    public void confirmBooking() throws Exception{
+        if(currentExam.getDoctor()==null){
+            try {
+                Doctor m = doctorRegister.getDoctor();
+                currentExam.setDoctor(m);
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }
+        currentExam.setPatient(currentPatient);
+        examBookingRegister.addBooking(currentExam);
+    }
+    public boolean checkBooking(int codice,String tipologia){
+        boolean f=false;
+        if(tipologia=="ESAME"){
+            f=examBookingRegister.checkPatient(codice,currentPatient);
+            if(f==true){
+                currentExam=examBookingRegister.getExam(codice);
+            }
+            return f;
+        }
+        else if (tipologia=="RICOVERO") {
+            f=hospitalizationBookingRegister.checkPatient(codice,currentPatient);
+            if(f==true){
+                currentHosp=hospitalizationBookingRegister.getHospitalization(codice);
+            }
+            return f;
+        }
+        return f;
+    }
+    public float calculateRefund(String tipologia){
+        float refund=0;
+        if(tipologia=="ESAME"){
+            refund=examBookingRegister.getRefund(currentExam.getCode());
+        }
+        else if (tipologia=="RICOVERO") {
+            refund=hospitalizationBookingRegister.getRefund(currentHosp.getCode());
+        }
+        return refund;
+    }
+    public void confirmCancel(String tipologia){
+        if(tipologia=="ESAME"){
+            examBookingRegister.remove(currentExam.getCode());
+        }
+        else if (tipologia=="RICOVERO") {
+            hospitalizationBookingRegister.remove(currentHosp.getCode());
+        }
+    }
 }

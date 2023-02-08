@@ -31,4 +31,11 @@ public class Exam {
         readyDate=data;
         readyDate.add(Calendar.DAY_OF_MONTH, type.getDaysToReady());
     }
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public Doctor getDoctor(){
+        return doctor;
+    }
 }

@@ -20,4 +20,10 @@ public class ExamBookingRegister {
     }
     public void remove(int codice){register.remove(codice);}
     public int getSize() { return register.size(); }
+    public boolean checkPatient(int codice, Patient p){
+        return true; //SISTEMA
+    }
+    public Exam getExam(int codice){
+        return register.get(codice);
+    }
 }
