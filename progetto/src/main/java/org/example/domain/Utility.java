@@ -4,12 +4,27 @@ import java.util.*;
 import java.sql.Time;
 import java.time.LocalDate;
 public class Utility {
-    public void loadPatient(){}
-    public void loadDoctor(){}
-    public List<Date> getDates(){
+    public static HashMap<String, Patient> loadPatient(){
+        HashMap<String, Patient> register = new HashMap<>();
+        Patient p1 = new Patient("Carlo", "Bianchi", LocalDate.now(), "via S.Carlo 1", "cf2", "3331112222", "ca.bianchi@gmail.com");
+        Patient p2 = new Patient("Marco", "Rossi", LocalDate.now(), "via S.Marco 2", "cf3", "3444444555", "mar.rss@gmail.com");
+        register.put(p1.getCf(),p1);
+        register.put(p2.getCf(),p2);
+        System.out.println("Caricamento pazienti completato");
+        return register;
+    }
+    public static void loadDoctor(){
+        DoctorRegister register = DoctorRegister.getInstance();
+        Doctor d1 = new Doctor("Damiano", "Gr", new Date(), "cf0", "da.gr@gmail.com", "000111222");
+        Doctor d2 = new Doctor("Eleonora", "Fd", new Date(), "cf1", "el.fg@gmail.com", "333444555");
+        register.addDoctor(d1);
+        register.addDoctor(d2);
+        System.out.println("Caricamento dottori completato");
+    }
+    public static List<Date> getDates(){
         return null;
     }
-    public List<Time> getTimes(){
+    public static List<Time> getTimes(){
         return null;
     }
 }
