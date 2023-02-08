@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import java.time.LocalDate;
+import java.sql.Time;
 import java.util.*;
 
 public class ClinicHub {
@@ -11,7 +12,8 @@ public class ClinicHub {
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private DoctorRegister doctorRegister;
-    private Map<Integer,Hospitalization> hospRegister;
+    private ExamBookingRegister examBookingRegister;
+    private HospitalizationBookingRegister hospitalizationBookingRegister;
 
     public Map<String, Patient> getPatientRegister() {
         return patientRegister;
@@ -23,10 +25,6 @@ public class ClinicHub {
 
     public Hospitalization getCurrentHosp() {
         return currentHosp;
-    }
-
-    public Map<Integer, Hospitalization> getHospRegister() {
-        return hospRegister;
     }
 
     // Pattern Singleton
@@ -116,8 +114,7 @@ public class ClinicHub {
             try {
                 Doctor m = doctorRegister.getDoctor();
                 currentHosp.setDoctor(m);
-                int cod=currentHosp.getCode();
-                hospRegister.put(cod,currentHosp);
+                hospitalizationBookingRegister.addBooking(currentHosp);
             } catch(Exception e) {
                 System.out.println("Nessun paziente presente");
             }
@@ -131,7 +128,8 @@ public class ClinicHub {
     private ClinicHub(){
         this.patientRegister = new HashMap<>();
         this.doctorRegister = DoctorRegister.getInstance();
-        this.hospRegister = new HashMap<>();
+        this.hospitalizationBookingRegister = HospitalizationBookingRegister.getInstance();
+        this.examBookingRegister=ExamBookingRegister.getInstance();
         this.loadPatients();
         this.loadDoctors();
     }
@@ -146,4 +144,11 @@ public class ClinicHub {
         return dates;
     }
 
+    public List<Date> newExamBooking(ExamType examType){return null;}
+    public List<Time> chooseExamDate(Date date){return null;}
+    public Date chooseExamTime(Time time){return null;}
+    public float showExamPrice(){return 0;}
+    public void confirmBooking(){}
+    public float calculateRefund(String tipologia){return 0;}
+    public void confirmCancel(String tipologia){}
 }
