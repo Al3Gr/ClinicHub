@@ -11,6 +11,7 @@ public class ClinicHub {
 
     private Patient currentPatient;
     private Hospitalization currentHosp;
+    private Exam currentExam;
     private DoctorRegister doctorRegister;
     private ExamBookingRegister examBookingRegister;
     private HospitalizationBookingRegister hospitalizationBookingRegister;
@@ -25,6 +26,9 @@ public class ClinicHub {
 
     public Hospitalization getCurrentHosp() {
         return currentHosp;
+    }
+    public Exam getCurrentExam(){
+        return currentExam;
     }
 
     // Pattern Singleton
@@ -144,7 +148,9 @@ public class ClinicHub {
         return dates;
     }
 
-    public List<Date> newExamBooking(ExamType examType){return null;}
+    public List<Date> newExamBooking(ExamType examType){
+        return null;
+    }
     public List<Time> chooseExamDate(Date date){return null;}
     public Date chooseExamTime(Time time){return null;}
     public float showExamPrice(){return 0;}
