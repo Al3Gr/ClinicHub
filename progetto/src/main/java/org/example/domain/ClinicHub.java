@@ -118,13 +118,12 @@ public class ClinicHub {
         this.examBookingRegister=ExamBookingRegister.getInstance();
     }
 
-    //TODO 4
     public void chooseDoctor(String lastname) throws Exception{
         if(currentExam != null) {
             try {
                 Doctor d = doctorRegister.getDoctor(lastname);
                 currentExam.setDoctor(d);
-                //currentExam.setprice() ??? VEDI COSA FARE
+                currentExam.setPrice((float) (currentExam.getPrice() + 0.5*currentExam.getPrice()));
             } catch (Exception e) {
                 System.out.println("Nessun dottore trovato con quel cognome");
             }

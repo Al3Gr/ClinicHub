@@ -42,4 +42,8 @@ public class Exam {
     public Doctor getDoctor(){
         return doctor;
     }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 }
