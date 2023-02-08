@@ -72,7 +72,7 @@ public class ClinicHub {
     public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
         if(currentPatient != null){
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
-            List<Date> dates = getAvailableDates();
+            List<Date> dates = Utility.getDates();
             return dates;
         } else {
             throw new Exception();
@@ -137,16 +137,7 @@ public class ClinicHub {
         this.loadPatients();
         this.loadDoctors();
     }
-    private List<Date> getAvailableDates(){
-        Calendar cal = Calendar.getInstance();
-        ArrayList<Date> dates = new ArrayList<>();
-        dates.add(cal.getTime());
-        for(int i = 1; i <= 30; i++) {
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-            dates.add(cal.getTime());
-        }
-        return dates;
-    }
+
 
     public List<Date> newExamBooking(ExamType examType){
         return null;

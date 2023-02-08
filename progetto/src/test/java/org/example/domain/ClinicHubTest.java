@@ -97,7 +97,7 @@ class ClinicHubTest {
             clinicHub.loginPatient("cf2");
             clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
             clinicHub.confirmHospitalization();
-            assertEquals(1, clinicHub.getHospRegister().size());
+            assertEquals(1, HospitalizationBookingRegister.getInstance().getSize());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
