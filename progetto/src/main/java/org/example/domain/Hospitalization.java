@@ -11,6 +11,11 @@ public abstract class Hospitalization{
     protected Patient patient;
     protected Doctor doctor;
     protected Operation op;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
     public abstract void setData(Calendar data);
 
     public float getPrice(){

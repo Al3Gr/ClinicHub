@@ -98,10 +98,6 @@ public class Patient {
             return false;
         }
         final Patient p = (Patient) obj;
-        if(this.cf == p.cf){
-            return true;
-        } else {
-            return false;
-        }
+        return this.cf == p.cf;
     }
 }

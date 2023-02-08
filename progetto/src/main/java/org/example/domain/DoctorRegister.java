@@ -37,7 +37,13 @@ public class DoctorRegister {
     }
 
     public int getSize() { return register.size(); }
-    public Doctor getDoctorByLastname(String lastname){
-        return null; //COME LO CERCHIAMO?
+
+    public Doctor getDoctor(String lastname) throws Exception{
+        for (Doctor d: register.values()) {
+            if(d.getLastname() == lastname)
+                return d;
+        }
+        throw new Exception("Nessun dottore presente con quel cognome");
     }
+
 }
