@@ -1,7 +1,8 @@
 package org.example.domain;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
 import java.sql.Time;
+import java.time.LocalDate;
 public class Utility {
     public void loadPatient(){}
     public void loadDoctor(){}

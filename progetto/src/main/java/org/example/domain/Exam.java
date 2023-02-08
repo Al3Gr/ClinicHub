@@ -1,8 +1,7 @@
 package org.example.domain;
 
-import java.util.Calendar;
 import java.sql.Time;
-import java.util.Random;
+import java.util.*;
 
 public class Exam {
     private float price;
