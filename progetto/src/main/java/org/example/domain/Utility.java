@@ -13,6 +13,7 @@ public class Utility {
         System.out.println("Caricamento pazienti completato");
         return register;
     }
+
     public static void loadDoctor(){
         DoctorRegister register = DoctorRegister.getInstance();
         Doctor d1 = new Doctor("Damiano", "Gr", new Date(), "cf0", "da.gr@gmail.com", "000111222");
@@ -21,8 +22,16 @@ public class Utility {
         register.addDoctor(d2);
         System.out.println("Caricamento dottori completato");
     }
+
     public static List<Date> getDates(){
-        return null;
+        Calendar cal = Calendar.getInstance();
+        ArrayList<Date> dates = new ArrayList<>();
+        dates.add(cal.getTime());
+        for(int i = 1; i <= 30; i++) {
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+            dates.add(cal.getTime());
+        }
+        return dates;
     }
     public static List<Time> getTimes(){
         return null;
