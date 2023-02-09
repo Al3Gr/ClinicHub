@@ -29,7 +29,7 @@ public class HospitalizationBookingRegister {
         long diff = (hospCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000);
         if (diff >= 7) {
             return (float) (0.5*ClinicHub.getInstance().getCurrentHosp().getPrice());
-        } else if (diff >= 0 && diff <= 3) {
+        } else if (diff >= 3) {
             return (float) (0.2*(ClinicHub.getInstance().getCurrentExam().getPrice()));
         }
         return 0;
