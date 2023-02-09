@@ -36,8 +36,8 @@ public class Exam {
         this.price=type.getPrice();
     }
     public void setData(Calendar data) {
-        setReadyDate(data);
         this.bookingDate=data;
+        setReadyDate(data);
     }
 
     private void setReadyDate(Calendar data){

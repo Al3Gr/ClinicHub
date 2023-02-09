@@ -231,7 +231,7 @@ class ClinicHubTest {
             date_string = "13-02-2023";
             date = formatter.parse(date_string);
             c.setTime(date);
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(c);
             clinicHub.confirmHospitalization();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
@@ -239,7 +239,7 @@ class ClinicHubTest {
             date_string = "10-02-2023";
             date = formatter.parse(date_string);
             c.setTime(date);
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
             clinicHub.chooseHospitalization(c);
             clinicHub.confirmHospitalization();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");

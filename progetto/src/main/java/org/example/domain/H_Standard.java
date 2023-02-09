@@ -12,7 +12,12 @@ public class H_Standard extends Hospitalization {
     @Override
     public void setData(Calendar data) {
         start_date = data;
-        end_date = data;
+        setEndDate(data);
+
+    }
+
+    private void setEndDate(Calendar data){
+        end_date = (Calendar) data.clone();
         end_date.add(Calendar.DAY_OF_MONTH, op.getConvalescence());
     }
 
