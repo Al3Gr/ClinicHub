@@ -159,7 +159,6 @@ public class ClinicHub {
         } else throw new Exception("Ordine chiamata dei metodi errato");
     }
 
-    //TODO 5
     public void confirmBooking() throws Exception{
         if (currentExam != null) {
             if (currentExam.getDoctor() == null) {
