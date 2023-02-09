@@ -5,9 +5,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
-public class Utility {
+public class UtilityUI {
     public static boolean validateData(String ...inputString) {
         for(String stringa : inputString) {
             if(stringa.equals(""))

@@ -78,7 +78,7 @@ public class loginPatientForm extends JFrame{
                         setValueVisible(true);
                     }
                 } catch (Exception ex) {
-                    Utility.alertFrame("Paziente non trovato");
+                    UtilityUI.alertFrame("Paziente non trovato");
                 }
             }
         });
@@ -96,7 +96,7 @@ public class loginPatientForm extends JFrame{
                     }
                     confirmHospFrame(dates);
                 } catch (Exception ex) {
-                    Utility.alertFrame("Inserire dati!!!");
+                    UtilityUI.alertFrame("Inserire dati!!!");
                 }
             }
         });
@@ -159,7 +159,7 @@ public class loginPatientForm extends JFrame{
                     endlabel_info.setVisible(true);
                     confirmButton.setVisible(true);
                 } catch (Exception ex) {
-                    Utility.alertFrame("Errore sconosciuto");
+                    UtilityUI.alertFrame("Errore sconosciuto");
                 }
             }
         });
@@ -181,7 +181,7 @@ public class loginPatientForm extends JFrame{
                     clinicHub.confirmHospitalization();
                     frame.dispose();
                 } catch (Exception ex) {
-                    Utility.alertFrame("Errore sconosciuto");
+                    UtilityUI.alertFrame("Errore sconosciuto");
                 }
             }
         });

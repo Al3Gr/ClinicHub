@@ -198,14 +198,22 @@ public class ClinicHub {
         return false;
     }
 
-    public float calculateRefund(String tipologia){
+    public float calculateRefund(String tipologia) throws Exception {
         float refund = 0;
 
         if(tipologia=="ESAME"){
-            refund=examBookingRegister.getRefund(currentExam.getCode());
+            if(currentExam != null) {
+                refund = examBookingRegister.getRefund(currentExam.getCode());
+            } else {
+                throw new Exception("currentExam is null");
+            }
         }
         else if (tipologia=="RICOVERO") {
-            refund=hospitalizationBookingRegister.getRefund(currentHosp.getCode());
+            if(currentHosp != null) {
+                refund = hospitalizationBookingRegister.getRefund(currentHosp.getCode());
+            } else {
+                throw new Exception("currentHosp is null");
+            }
         }
 
         return refund;

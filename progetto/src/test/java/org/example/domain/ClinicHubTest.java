@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,6 @@ class ClinicHubTest {
     public static void initTest(){
         clinicHub = ClinicHub.getInstance();
     }
-
 
     @Test
     void testAddPatient() {
@@ -190,6 +190,7 @@ class ClinicHubTest {
     @Test
     void testCalculateRefund() {
         try {
+            // TEST REFUND ESAME
             String date_string = "01-03-2023";
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date date = formatter.parse(date_string);
@@ -209,9 +210,43 @@ class ClinicHubTest {
             clinicHub.confirmBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), 0.5 * clinicHub.getCurrentExam().getPrice());
+            date_string = "10-02-2023";
+            date = formatter.parse(date_string);
+            c.setTime(date);
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(c);
+            clinicHub.confirmBooking();
+            clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
+            assertEquals(clinicHub.calculateRefund("ESAME"), 0);
+
+            // TEST REFUND RICOVERO
+            date_string = "11-03-2023";
+            date = formatter.parse(date_string);
+            c.setTime(date);
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(c);
+            clinicHub.confirmHospitalization();
+            clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
+            assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.5 * clinicHub.getCurrentHosp().getPrice());
+            date_string = "13-02-2023";
+            date = formatter.parse(date_string);
+            c.setTime(date);
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(c);
+            clinicHub.confirmHospitalization();
+            clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
+            assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.2 * clinicHub.getCurrentHosp().getPrice());
+            date_string = "10-02-2023";
+            date = formatter.parse(date_string);
+            c.setTime(date);
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(c);
+            clinicHub.confirmHospitalization();
+            clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
+            assertEquals(clinicHub.calculateRefund("RICOVERO"), 0);
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            fail("Unexpected exception");
         }
     }
 

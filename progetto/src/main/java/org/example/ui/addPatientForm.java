@@ -47,7 +47,7 @@ public class addPatientForm extends JFrame{
         btnConfirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Utility.validateData(nameField.getText(), lastnameField.getText(),residenceField.getText(), cfField.getText(), telField.getText(), emailField.getText())) {
+                if(UtilityUI.validateData(nameField.getText(), lastnameField.getText(),residenceField.getText(), cfField.getText(), telField.getText(), emailField.getText())) {
                     try {
                         clinicHub.addPatient(nameField.getText(), lastnameField.getText(), datePicker.getDate(), residenceField.getText(), cfField.getText(), telField.getText(), emailField.getText());
                         confirmFrame();
