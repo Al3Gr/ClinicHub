@@ -24,9 +24,9 @@ public class Exam {
 
     public float getPrice() {return price;};
     public int getCode() {return code;};
-    public Calendar getBookingDate() {return bookingDate;};
+    public Calendar getBookingDate() {return this.bookingDate;};
 
-    public Calendar getReadyDate() { return readyDate;};
+    public Calendar getReadyDate() { return this.readyDate;};
     public LocalTime getTime() {return time;};
     public void setPatient(Patient p) {this.patient=p;};
     public void setDoctor(Doctor d) {this.doctor=d;};
@@ -36,9 +36,14 @@ public class Exam {
         this.price=type.getPrice();
     }
     public void setData(Calendar data) {
+        setReadyDate(data);
         this.bookingDate=data;
-        this.readyDate=data;
-        this.readyDate.add(Calendar.DAY_OF_MONTH, this.type.getDaysToReady());
+    }
+
+    private void setReadyDate(Calendar data){
+        readyDate= (Calendar) data.clone();
+        readyDate.add(Calendar.DAY_OF_MONTH, type.getDaysToReady());
+
     }
     public void setTime(LocalTime time) {
         this.time = time;

@@ -3,6 +3,7 @@ package org.example.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -188,6 +189,30 @@ class ClinicHubTest {
 
     @Test
     void testCalculateRefund() {
+        try {
+            String date_string = "01-03-2023";
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = formatter.parse(date_string);
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            clinicHub.loginPatient("cf2");
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(c);
+            clinicHub.confirmBooking();
+            clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
+            assertEquals(clinicHub.calculateRefund("ESAME"), clinicHub.getCurrentExam().getPrice());
+            date_string = "11-02-2023";
+            date = formatter.parse(date_string);
+            c.setTime(date);
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(c);
+            clinicHub.confirmBooking();
+            clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
+            assertEquals(clinicHub.calculateRefund("ESAME"), 0.5 * clinicHub.getCurrentExam().getPrice());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
