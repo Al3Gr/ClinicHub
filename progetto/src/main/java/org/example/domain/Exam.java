@@ -12,7 +12,7 @@ public class Exam {
     private LocalTime time;
     private Patient patient;
     private Doctor doctor;
-    private ExamType type;
+    private final ExamType type;
 
     public void setCode(int code) {
         this.code = code;
@@ -22,14 +22,14 @@ public class Exam {
         return patient;
     }
 
-    public float getPrice() {return price;};
-    public int getCode() {return code;};
-    public Calendar getBookingDate() {return this.bookingDate;};
+    public float getPrice() {return price;}
+    public int getCode() {return code;}
+    public Calendar getBookingDate() {return this.bookingDate;}
 
-    public Calendar getReadyDate() { return this.readyDate;};
-    public LocalTime getTime() {return time;};
-    public void setPatient(Patient p) {this.patient=p;};
-    public void setDoctor(Doctor d) {this.doctor=d;};
+    public Calendar getReadyDate() { return this.readyDate;}
+    public LocalTime getTime() {return time;}
+    public void setPatient(Patient p) {this.patient=p;}
+    public void setDoctor(Doctor d) {this.doctor=d;}
     public Exam(ExamType type){
         this.type=type;
         this.code= new Random().nextInt();

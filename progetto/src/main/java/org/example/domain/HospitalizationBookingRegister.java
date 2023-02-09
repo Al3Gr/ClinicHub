@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HospitalizationBookingRegister {
-    private Map<Integer, Hospitalization> register;
+    private final Map<Integer, Hospitalization> register;
     private static HospitalizationBookingRegister hospitalizationBookingRegister;
 
     //Pattern Singleton

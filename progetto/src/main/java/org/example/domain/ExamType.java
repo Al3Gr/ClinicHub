@@ -7,8 +7,8 @@ public enum ExamType {
     ECHOCARDIOGRAPHY(50,8),
     ELECTROMYOGRAPHY(50,8),
     ELECTROENCEPHALOGRAPHY(50,7);
-    private float price;
-    private int daysToReady;
+    private final float price;
+    private final int daysToReady;
     ExamType(float price, int daysToReady) {
         this.price = price;
         this.daysToReady = daysToReady;

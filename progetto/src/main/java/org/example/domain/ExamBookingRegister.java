@@ -7,7 +7,7 @@ import java.util.Map;
 import java.time.*;
 
 public class ExamBookingRegister {
-    private Map<Integer, Exam> register;
+    private final Map<Integer, Exam> register;
     private static ExamBookingRegister examBookingRegister;
 
     //Pattern Singleton

@@ -15,8 +15,8 @@ public enum Operation {
     PERICARDIECTOMY(150, 25);
 
 
-    private float price;
-    private int convalescence;
+    private final float price;
+    private final int convalescence;
 
     Operation(float price, int convalescence) {
         this.price = price;

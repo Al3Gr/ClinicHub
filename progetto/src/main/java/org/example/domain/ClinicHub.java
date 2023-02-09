@@ -7,7 +7,7 @@ import java.util.*;
 public class ClinicHub {
 
     private static ClinicHub clinicHub;
-    private Map<String, Patient> patientRegister;
+    private final Map<String, Patient> patientRegister;
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private Exam currentExam;
@@ -70,8 +70,7 @@ public class ClinicHub {
     public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
         if(currentPatient != null){
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
-            List<Date> dates = Utility.getDates();
-            return dates;
+            return Utility.getDates();
         } else {
             throw new Exception("currentPatient is null");
         }
@@ -135,8 +134,7 @@ public class ClinicHub {
     public List<Date> newExamBooking(ExamType examType) throws Exception{
         if(currentPatient != null) {
             currentExam = new Exam(examType);
-            List<Date> dates = Utility.getDates();
-            return dates;
+            return Utility.getDates();
         } else {
             throw new Exception("currentPatient is null");
         }
@@ -145,8 +143,7 @@ public class ClinicHub {
     public List<LocalTime> chooseExamDate(Calendar date) throws Exception{
         if(currentExam != null){
          currentExam.setData(date);
-         List<LocalTime> times=Utility.getTimes();
-         return times;
+         return Utility.getTimes();
         } else {
             throw new Exception("Ordine chiamata metodi non rispettato");
         }

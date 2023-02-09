@@ -2,7 +2,6 @@ package org.example.domain;
 
 import java.time.LocalTime;
 import java.util.*;
-import java.sql.Time;
 import java.time.LocalDate;
 public class Utility {
     public static HashMap<String, Patient> loadPatient(){

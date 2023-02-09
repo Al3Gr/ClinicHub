@@ -20,7 +20,7 @@ public abstract class Hospitalization{
 
     public float getPrice(){
         return this.price;
-    };
+    }
 
     public Calendar getStart_date() {
         return start_date;
