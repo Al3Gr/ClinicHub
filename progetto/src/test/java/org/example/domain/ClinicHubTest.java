@@ -155,9 +155,11 @@ class ClinicHubTest {
     void testConfirmBooking() {
         try{
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.confirmHospitalization();
-            assertEquals(1, HospitalizationBookingRegister.getInstance().getSize());
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(Calendar.getInstance());
+            clinicHub.chooseExamTime(LocalTime.now());
+            clinicHub.confirmBooking();
+            assertEquals(1, ExamBookingRegister.getInstance().getSize());
         } catch (Exception e) {
             fail("Unexpected exception");
         }
