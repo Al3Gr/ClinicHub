@@ -21,7 +21,6 @@ public class ExamBookingRegister {
 
     public void addBooking(Exam exam){register.put(exam.getCode(), exam);}
 
-    //TODO 1
     public float getRefund(int codice){
         Exam e = register.get(codice);
         Calendar examCalendar = e.getBookingDate();

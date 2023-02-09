@@ -1,7 +1,7 @@
 package org.example.domain;
 
 import java.time.LocalDate;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.*;
 
 public class ClinicHub {
@@ -11,9 +11,9 @@ public class ClinicHub {
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private Exam currentExam;
-    private DoctorRegister doctorRegister;
-    private ExamBookingRegister examBookingRegister;
-    private HospitalizationBookingRegister hospitalizationBookingRegister;
+    private final DoctorRegister doctorRegister;
+    private final ExamBookingRegister examBookingRegister;
+    private final HospitalizationBookingRegister hospitalizationBookingRegister;
 
     public Map<String, Patient> getPatientRegister() {
         return patientRegister;
@@ -138,31 +138,31 @@ public class ClinicHub {
         return dates;
     }
 
-    public List<Time> chooseExamDate(Calendar date){
+    public List<LocalTime> chooseExamDate(Calendar date){
          currentExam.setData(date);
-         List<Time> times=Utility.getTimes();
+         List<LocalTime> times=Utility.getTimes();
          return times;
     }
 
-    public Calendar chooseExamTime(Time time){
+    public Calendar chooseExamTime(LocalTime time){
         currentExam.setTime(time);
         return currentExam.getReadyDate();
     }
 
     public float showExamPrice(){ return currentExam.getPrice();}
 
-    //TODO 5
+
     public void confirmBooking() throws Exception{
-        if(currentExam.getDoctor()==null){
-            try {
+        if(currentPatient != null) {
+            if (currentExam.getDoctor() == null) {
                 Doctor m = doctorRegister.getDoctor();
                 currentExam.setDoctor(m);
-            }catch(Exception e){
-                System.out.println(e);
             }
+            currentExam.setPatient(currentPatient);
+            examBookingRegister.addBooking(currentExam);
+        } else {
+            throw new Exception("ordine chiamata dei metodi errato");
         }
-        currentExam.setPatient(currentPatient);
-        examBookingRegister.addBooking(currentExam);
     }
 
     public boolean checkBooking(int codice,String tipologia) throws Exception{

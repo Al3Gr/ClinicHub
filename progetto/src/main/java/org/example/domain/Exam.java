@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Exam {
@@ -8,7 +9,7 @@ public class Exam {
     private int code;
     private Calendar bookingDate;
     private Calendar readyDate;
-    private Time time;
+    private LocalTime time;
     private Patient patient;
     private Doctor doctor;
     private ExamType type;
@@ -22,7 +23,7 @@ public class Exam {
     public Calendar getBookingDate() {return bookingDate;};
 
     public Calendar getReadyDate() { return readyDate;};
-    public Time getTime() {return time;};
+    public LocalTime getTime() {return time;};
     public void setPatient(Patient p) {this.patient=p;};
     public void setDoctor(Doctor d) {this.doctor=d;};
     public Exam(ExamType type){
@@ -35,7 +36,7 @@ public class Exam {
         this.readyDate=data;
         this.readyDate.add(Calendar.DAY_OF_MONTH, this.type.getDaysToReady());
     }
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
