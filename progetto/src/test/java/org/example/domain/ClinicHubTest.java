@@ -217,5 +217,31 @@ class ClinicHubTest {
 
     @Test
     void testConfirmCancel() {
+        try{
+            clinicHub.loginPatient("cf2");
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(Calendar.getInstance());
+            clinicHub.chooseExamTime(LocalTime.now());
+            clinicHub.confirmBooking();
+
+            clinicHub.loginPatient("cf2");
+            clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(),"ESAME");
+            clinicHub.calculateRefund("ESAME");
+            clinicHub.confirmCancel("ESAME");
+            assertEquals(0,ExamBookingRegister.getInstance().getSize());
+
+            clinicHub.loginPatient("cf2");
+            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalization(Calendar.getInstance());
+            clinicHub.confirmHospitalization();
+
+            clinicHub.loginPatient("cf2");
+            clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(),"RICOVERO");
+            clinicHub.calculateRefund("RICOVERO");
+            clinicHub.confirmCancel("RICOVERO");
+            assertEquals(0,HospitalizationBookingRegister.getInstance().getSize());
+        }catch(Exception e){
+            fail("Unexpected exception");
+        }
     }
 }
