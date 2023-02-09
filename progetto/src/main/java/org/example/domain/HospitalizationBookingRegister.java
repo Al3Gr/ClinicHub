@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,8 +23,16 @@ public class HospitalizationBookingRegister {
     }
 
     //TODO 2
-    public float getRefund(int codice){
-        return (register.get(codice)).getPrice(); //DA SISTEMARE QUANTO SI PUO TORNARE IN BASE AI GIORNI;
+    public float getRefund(){
+        Calendar hospCalendar = ClinicHub.getInstance().getCurrentHosp().getStart_date();
+        Calendar now = Calendar.getInstance();
+        long diff = (hospCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+        if (diff >= 7) {
+            return (float) (0.5*ClinicHub.getInstance().getCurrentHosp().getPrice());
+        } else if (diff >= 0 && diff <= 3) {
+            return (float) (0.2*(ClinicHub.getInstance().getCurrentExam().getPrice()));
+        }
+        return 0;
     }
 
     public void remove(int codice){register.remove(codice);}
