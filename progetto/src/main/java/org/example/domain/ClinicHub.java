@@ -138,35 +138,45 @@ public class ClinicHub {
         return dates;
     }
 
-    public List<Time> chooseExamDate(Calendar date){
-         currentExam.setData(date);
-         List<Time> times=Utility.getTimes();
-         return times;
+    public List<Time> chooseExamDate(Calendar date) throws Exception{
+        if (currentExam != null) {
+            currentExam.setData(date);
+            List<Time> times=Utility.getTimes();
+            return times;
+        } else throw new Exception("Ordine chiamata dei metodi errato");
     }
 
-    public Calendar chooseExamTime(Time time){
-        currentExam.setTime(time);
-        return currentExam.getReadyDate();
+    public Calendar chooseExamTime(Time time) throws Exception{
+        if (currentExam != null) {
+            currentExam.setTime(time);
+            return currentExam.getReadyDate();
+        } else throw new Exception("Ordine chiamata dei metodi errato");
     }
 
-    public float showExamPrice(){ return currentExam.getPrice();}
+    public float showExamPrice() throws Exception {
+        if (currentExam != null) {
+            return currentExam.getPrice();
+        } else throw new Exception("Ordine chiamata dei metodi errato");
+    }
 
     //TODO 5
     public void confirmBooking() throws Exception{
-        if(currentExam.getDoctor()==null){
-            try {
-                Doctor m = doctorRegister.getDoctor();
-                currentExam.setDoctor(m);
-            }catch(Exception e){
-                System.out.println(e);
+        if (currentExam != null) {
+            if (currentExam.getDoctor() == null) {
+                try {
+                    Doctor m = doctorRegister.getDoctor();
+                    currentExam.setDoctor(m);
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
-        }
-        currentExam.setPatient(currentPatient);
-        examBookingRegister.addBooking(currentExam);
+            currentExam.setPatient(currentPatient);
+            examBookingRegister.addBooking(currentExam);
+        } else throw new Exception("Ordine chiamata dei metodi errato");
     }
 
     public boolean checkBooking(int codice,String tipologia) throws Exception{
-        if(tipologia=="ESAME"){
+        if(tipologia=="ESAME" && currentPatient != null){
             if(examBookingRegister.checkPatient(codice,currentPatient)){
                 currentExam=examBookingRegister.getExam(codice);
                 return true;
@@ -174,40 +184,37 @@ public class ClinicHub {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
             }
         }
-        else if (tipologia=="RICOVERO") {
+        else if (tipologia=="RICOVERO" && currentPatient != null) {
             if(hospitalizationBookingRegister.checkPatient(codice,currentPatient)){
                 currentHosp=hospitalizationBookingRegister.getHospitalization(codice);
                 return true;
             } else {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
             }
+        } else {
+            throw new Exception("Ordine chiamata metodi errato");
         }
-        return false;
     }
 
-    public float calculateRefund(String tipologia){
-        float refund = 0;
-
-        if(tipologia=="ESAME"){
-            refund=examBookingRegister.getRefund(currentExam.getCode());
+    public float calculateRefund(String tipologia) throws Exception {
+        if(tipologia=="ESAME" && currentExam != null){
+            return examBookingRegister.getRefund(currentExam.getCode());
+        } else if (tipologia=="RICOVERO" && currentHosp != null) {
+            return hospitalizationBookingRegister.getRefund(currentHosp.getCode());
+        } else {
+            throw new Exception("Ordine chiamata metodi errato");
         }
-        else if (tipologia=="RICOVERO") {
-            refund=hospitalizationBookingRegister.getRefund(currentHosp.getCode());
-        }
-
-        return refund;
     }
 
-    public void confirmCancel(String tipologia){
-
-        if(tipologia=="ESAME"){
+    public void confirmCancel(String tipologia) throws Exception{
+        if(tipologia=="ESAME" && currentExam != null){
             examBookingRegister.remove(currentExam.getCode());
         }
-        else if (tipologia=="RICOVERO") {
+        else if (tipologia=="RICOVERO" && currentHosp != null) {
             hospitalizationBookingRegister.remove(currentHosp.getCode());
+        } else {
+            throw new Exception("Ordine chiamata metodi non rispettato");
         }
-
     }
-
 
 }
