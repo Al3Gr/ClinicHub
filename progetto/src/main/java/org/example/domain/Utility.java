@@ -39,11 +39,14 @@ public class Utility {
         LocalTime start_time = LocalTime.of(8, 0, 0);
         LocalTime end_time = LocalTime.of(18, 0, 0);
         ArrayList<LocalTime> times = new ArrayList<>();
-        for(int i = 0; start_time.compareTo(end_time) <= 0; i+= 15 ){
-            start_time.plusMinutes(i);
+        int i = 30;
+        while (start_time.compareTo(end_time) <= 0){
             times.add(start_time);
+            start_time = start_time.plusMinutes(i);
         }
 
         return times;
     }
+
+
 }

@@ -1,6 +1,5 @@
 package org.example.domain;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -74,7 +73,7 @@ public class ClinicHub {
             List<Date> dates = Utility.getDates();
             return dates;
         } else {
-            throw new Exception();
+            throw new Exception("currentPatient is null");
         }
 
     }
@@ -133,50 +132,54 @@ public class ClinicHub {
         }
     }
 
-    public List<Date> newExamBooking(ExamType examType){
-        currentExam=new Exam(examType);
-        List<Date> dates = Utility.getDates();
-        return dates;
+    public List<Date> newExamBooking(ExamType examType) throws Exception{
+        if(currentPatient != null) {
+            currentExam = new Exam(examType);
+            List<Date> dates = Utility.getDates();
+            return dates;
+        } else {
+            throw new Exception("currentPatient is null");
+        }
     }
 
     public List<LocalTime> chooseExamDate(Calendar date) throws Exception{
-        if (currentExam != null) {
-            currentExam.setData(date);
-            List<LocalTime> times=Utility.getTimes();
-            return times;
-        } else throw new Exception("Ordine chiamata dei metodi errato");
+        if(currentExam != null){
+         currentExam.setData(date);
+         List<LocalTime> times=Utility.getTimes();
+         return times;
+        } else {
+            throw new Exception("Ordine chiamata metodi non rispettato");
+        }
     }
 
     public Calendar chooseExamTime(LocalTime time) throws Exception{
-        if (currentExam != null) {
+        if(currentExam != null){
             currentExam.setTime(time);
             return currentExam.getReadyDate();
-        } else throw new Exception("Ordine chiamata dei metodi errato");
+        } else {
+            throw new Exception("Ordine chiamata metodi non rispettato");
+        }
+
     }
 
-    public float showExamPrice() throws Exception {
-        if (currentExam != null) {
-            return currentExam.getPrice();
-        } else throw new Exception("Ordine chiamata dei metodi errato");
-    }
+    public float showExamPrice(){ return currentExam.getPrice();}
+
 
     public void confirmBooking() throws Exception{
-        if (currentExam != null && currentPatient != null) {
+        if(currentPatient != null) {
             if (currentExam.getDoctor() == null) {
-                try {
-                    Doctor m = doctorRegister.getDoctor();
-                    currentExam.setDoctor(m);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
+                Doctor m = doctorRegister.getDoctor();
+                currentExam.setDoctor(m);
             }
             currentExam.setPatient(currentPatient);
             examBookingRegister.addBooking(currentExam);
-        } else throw new Exception("Ordine chiamata dei metodi errato");
+        } else {
+            throw new Exception("ordine chiamata dei metodi errato");
+        }
     }
 
     public boolean checkBooking(int codice,String tipologia) throws Exception{
-        if(tipologia=="ESAME" && currentPatient != null){
+        if(tipologia=="ESAME"){
             if(examBookingRegister.checkPatient(codice,currentPatient)){
                 currentExam=examBookingRegister.getExam(codice);
                 return true;
@@ -184,37 +187,40 @@ public class ClinicHub {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
             }
         }
-        else if (tipologia=="RICOVERO" && currentPatient != null) {
+        else if (tipologia=="RICOVERO") {
             if(hospitalizationBookingRegister.checkPatient(codice,currentPatient)){
                 currentHosp=hospitalizationBookingRegister.getHospitalization(codice);
                 return true;
             } else {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
             }
-        } else {
-            throw new Exception("Ordine chiamata metodi errato");
         }
+        return false;
     }
 
-    public float calculateRefund(String tipologia) throws Exception {
-        if(tipologia=="ESAME" && currentExam != null){
-            return examBookingRegister.getRefund(currentExam.getCode());
-        } else if (tipologia=="RICOVERO" && currentHosp != null) {
-            return hospitalizationBookingRegister.getRefund(currentHosp.getCode());
-        } else {
-            throw new Exception("Ordine chiamata metodi errato");
+    public float calculateRefund(String tipologia){
+        float refund = 0;
+
+        if(tipologia=="ESAME"){
+            refund=examBookingRegister.getRefund(currentExam.getCode());
         }
+        else if (tipologia=="RICOVERO") {
+            refund=hospitalizationBookingRegister.getRefund(currentHosp.getCode());
+        }
+
+        return refund;
     }
 
-    public void confirmCancel(String tipologia) throws Exception{
-        if(tipologia=="ESAME" && currentExam != null){
+    public void confirmCancel(String tipologia){
+
+        if(tipologia=="ESAME"){
             examBookingRegister.remove(currentExam.getCode());
         }
-        else if (tipologia=="RICOVERO" && currentHosp != null) {
+        else if (tipologia=="RICOVERO") {
             hospitalizationBookingRegister.remove(currentHosp.getCode());
-        } else {
-            throw new Exception("Ordine chiamata metodi non rispettato");
         }
+
     }
+
 
 }

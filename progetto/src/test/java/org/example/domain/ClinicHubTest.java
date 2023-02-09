@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -99,43 +100,54 @@ class ClinicHubTest {
             clinicHub.confirmHospitalization();
             assertEquals(1, HospitalizationBookingRegister.getInstance().getSize());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            fail("Unexpected exception");
         }
     }
 
     @Test
-    void chooseDoctor() {
+    void testChooseDoctor() {
+        try {
+            clinicHub.loginPatient("cf2");
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(Calendar.getInstance());
+            clinicHub.chooseExamTime(LocalTime.now());
+            clinicHub.chooseDoctor("Fd");
+            assertNotNull(clinicHub.getCurrentExam().getDoctor());
+            assertEquals(clinicHub.getCurrentExam().getDoctor().getLastname(), "Fd");
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test
-    void newExamBooking() {
+    void testNewExamBooking() {
+        try {
+            clinicHub.loginPatient("cf2");
+            ArrayList<Date> dates = (ArrayList<Date>)clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            assertNotNull(clinicHub.getCurrentExam());
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
+
     }
 
     @Test
-    void chooseExamDate() {
+    void testShowExamPrice() {
     }
 
     @Test
-    void chooseExamTime() {
+    void testConfirmBooking() {
     }
 
     @Test
-    void showExamPrice() {
+    void testCheckBooking() {
     }
 
     @Test
-    void confirmBooking() {
+    void testCalculateRefund() {
     }
 
     @Test
-    void checkBooking() {
-    }
-
-    @Test
-    void calculateRefund() {
-    }
-
-    @Test
-    void confirmCancel() {
+    void testConfirmCancel() {
     }
 }
