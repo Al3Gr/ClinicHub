@@ -133,7 +133,23 @@ class ClinicHubTest {
 
     @Test
     void testShowExamPrice() {
+        try {
+            clinicHub.loginPatient("cf2");
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(Calendar.getInstance());
+            clinicHub.chooseExamTime(LocalTime.now());
+            clinicHub.chooseDoctor("Fd");
+            assertEquals(45,clinicHub.showExamPrice());
 
+            clinicHub.loginPatient("cf2");
+            clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            clinicHub.chooseExamDate(Calendar.getInstance());
+            clinicHub.chooseExamTime(LocalTime.now());
+            clinicHub.chooseDoctor("");
+            assertEquals(30,clinicHub.showExamPrice());
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test
