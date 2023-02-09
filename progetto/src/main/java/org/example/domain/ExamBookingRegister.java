@@ -22,18 +22,18 @@ public class ExamBookingRegister {
     public void addBooking(Exam exam){register.put(exam.getCode(), exam);}
 
     //TODO 1
-    public float getRefund(){
-        Calendar examCalendar = ClinicHub.getInstance().getCurrentExam().getBookingDate();
-        examCalendar.add(Calendar.HOUR_OF_DAY,ClinicHub.getInstance().getCurrentExam().getTime().getHours());
-        examCalendar.add(Calendar.MINUTE,ClinicHub.getInstance().getCurrentExam().getTime().getMinutes());
+    public float getRefund(int codice){
+        Exam e = register.get(codice);
+        Calendar examCalendar = e.getBookingDate();
         Calendar now = Calendar.getInstance();
-        long diff = (examCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+        long diff = ((examCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000));
         if (diff >= 4) {
-            return ClinicHub.getInstance().getCurrentExam().getPrice();
+            return e.getPrice();
         } else if (diff >= 0 && diff <= 2) {
             return (float) (0.5*(ClinicHub.getInstance().getCurrentExam().getPrice()));
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     public void remove(int codice){register.remove(codice);}

@@ -22,17 +22,18 @@ public class HospitalizationBookingRegister {
         register.put(hospitalization.getCode(), hospitalization);
     }
 
-    //TODO 2
-    public float getRefund(){
-        Calendar hospCalendar = ClinicHub.getInstance().getCurrentHosp().getStart_date();
+    public float getRefund(int codice){
+        Hospitalization hosp = register.get(codice);
+        Calendar hospCalendar = hosp.getStart_date();
         Calendar now = Calendar.getInstance();
-        long diff = (hospCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+        long diff = ((hospCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000));
         if (diff >= 7) {
-            return (float) (0.5*ClinicHub.getInstance().getCurrentHosp().getPrice());
+            return (float) (0.5 * hosp.getPrice());
         } else if (diff >= 3) {
-            return (float) (0.2*(ClinicHub.getInstance().getCurrentExam().getPrice()));
+            return (float) (0.2 * hosp.getPrice());
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     public void remove(int codice){register.remove(codice);}

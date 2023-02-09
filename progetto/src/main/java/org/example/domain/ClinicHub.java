@@ -186,14 +186,13 @@ public class ClinicHub {
     }
 
     public float calculateRefund(String tipologia){
-
         float refund = 0;
 
         if(tipologia=="ESAME"){
-            refund=examBookingRegister.getRefund();
+            refund=examBookingRegister.getRefund(currentExam.getCode());
         }
         else if (tipologia=="RICOVERO") {
-            refund=hospitalizationBookingRegister.getRefund();
+            refund=hospitalizationBookingRegister.getRefund(currentHosp.getCode());
         }
 
         return refund;
