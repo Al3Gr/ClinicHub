@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import java.time.LocalTime;
 import java.util.*;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -34,8 +35,15 @@ public class Utility {
         return dates;
     }
 
-    //TODO 3
-    public static List<Time> getTimes(){
-        return null;
+    public static List<LocalTime> getTimes(){
+        LocalTime start_time = LocalTime.of(8, 0, 0);
+        LocalTime end_time = LocalTime.of(18, 0, 0);
+        ArrayList<LocalTime> times = new ArrayList<>();
+        for(int i = 0; start_time.compareTo(end_time) <= 0; i+= 15 ){
+            start_time.plusMinutes(i);
+            times.add(start_time);
+        }
+
+        return times;
     }
 }

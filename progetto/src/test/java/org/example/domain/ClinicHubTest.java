@@ -102,4 +102,40 @@ class ClinicHubTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void chooseDoctor() {
+    }
+
+    @Test
+    void newExamBooking() {
+    }
+
+    @Test
+    void chooseExamDate() {
+    }
+
+    @Test
+    void chooseExamTime() {
+    }
+
+    @Test
+    void showExamPrice() {
+    }
+
+    @Test
+    void confirmBooking() {
+    }
+
+    @Test
+    void checkBooking() {
+    }
+
+    @Test
+    void calculateRefund() {
+    }
+
+    @Test
+    void confirmCancel() {
+    }
 }

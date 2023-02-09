@@ -1,7 +1,8 @@
 package org.example.domain;
 
-import java.time.LocalDate;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 public class ClinicHub {
@@ -11,9 +12,9 @@ public class ClinicHub {
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private Exam currentExam;
-    private DoctorRegister doctorRegister;
-    private ExamBookingRegister examBookingRegister;
-    private HospitalizationBookingRegister hospitalizationBookingRegister;
+    private final DoctorRegister doctorRegister;
+    private final ExamBookingRegister examBookingRegister;
+    private final HospitalizationBookingRegister hospitalizationBookingRegister;
 
     public Map<String, Patient> getPatientRegister() {
         return patientRegister;
@@ -138,15 +139,15 @@ public class ClinicHub {
         return dates;
     }
 
-    public List<Time> chooseExamDate(Calendar date) throws Exception{
+    public List<LocalTime> chooseExamDate(Calendar date) throws Exception{
         if (currentExam != null) {
             currentExam.setData(date);
-            List<Time> times=Utility.getTimes();
+            List<LocalTime> times=Utility.getTimes();
             return times;
         } else throw new Exception("Ordine chiamata dei metodi errato");
     }
 
-    public Calendar chooseExamTime(Time time) throws Exception{
+    public Calendar chooseExamTime(LocalTime time) throws Exception{
         if (currentExam != null) {
             currentExam.setTime(time);
             return currentExam.getReadyDate();
@@ -160,7 +161,7 @@ public class ClinicHub {
     }
 
     public void confirmBooking() throws Exception{
-        if (currentExam != null) {
+        if (currentExam != null && currentPatient != null) {
             if (currentExam.getDoctor() == null) {
                 try {
                     Doctor m = doctorRegister.getDoctor();
