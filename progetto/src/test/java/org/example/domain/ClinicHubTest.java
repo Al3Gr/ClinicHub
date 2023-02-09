@@ -133,6 +133,7 @@ class ClinicHubTest {
 
     @Test
     void testShowExamPrice() {
+
     }
 
     @Test
@@ -141,6 +142,23 @@ class ClinicHubTest {
 
     @Test
     void testCheckBooking() {
+        try {
+            clinicHub.loginPatient("cf2");
+            Exam e = new Exam(ExamType.BLOOD_ANALYSIS);
+            e.setCode(1);
+            e.setPatient(clinicHub.getCurrentPatient());
+            ExamBookingRegister.getInstance().addBooking(e);
+            clinicHub.checkBooking(1, "ESAME");
+            assertNotNull(clinicHub.getCurrentExam());
+            Hospitalization hosp = HospitalizationFactory.getNewHospitalization("STANDARD", Operation.VASECTOMY);
+            hosp.setCode(1);
+            hosp.setPatient(clinicHub.getCurrentPatient());
+            HospitalizationBookingRegister.getInstance().addBooking(hosp);
+            clinicHub.checkBooking(1, "RICOVERO");
+            assertNotNull(clinicHub.getCurrentHosp());
+        } catch (Exception e) {
+            fail("currentExam or currentHospitalization is null");
+        }
     }
 
     @Test

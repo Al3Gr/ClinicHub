@@ -14,6 +14,10 @@ public class Exam {
     private Doctor doctor;
     private ExamType type;
 
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     public Patient getPatient() {
         return patient;
     }

@@ -30,6 +30,10 @@ public abstract class Hospitalization{
         return code;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     public Calendar getEnd_date() {
         return end_date;
     }
