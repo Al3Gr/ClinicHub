@@ -13,7 +13,6 @@ public class ClinicHubForm extends JFrame {
     private JPanel welcomePanel;
     private JButton btnAddPatient;
     private JButton btnLoginPatient;
-    private JButton btnDeleteBooking;
 
     public ClinicHubForm(JFrame parent){
         super();
@@ -34,6 +33,7 @@ public class ClinicHubForm extends JFrame {
                 new PatientOperationForm(parent);
             }
         });
+
 
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -189,58 +189,47 @@ class ClinicHubTest {
 
     @Test
     void testCalculateRefund() {
+        //TODO
         try {
             // TEST REFUND ESAME
-            String date_string = "01-03-2023";
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            Date date = formatter.parse(date_string);
-            Calendar c = Calendar.getInstance();
-            c.setTime(date);
+            Calendar c1 = Calendar.getInstance();
+            c1.add(Calendar.DAY_OF_MONTH, 7);
             clinicHub.loginPatient("cf2");
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
-            clinicHub.chooseExamDate(c);
+            clinicHub.chooseExamDate(c1);
             clinicHub.confirmBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), clinicHub.getCurrentExam().getPrice());
-            date_string = "12-02-2023";
-            date = formatter.parse(date_string);
-            c.setTime(date);
+            Calendar c2 = Calendar.getInstance();
+            c2.add(Calendar.DAY_OF_MONTH, 3);
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
-            clinicHub.chooseExamDate(c);
+            clinicHub.chooseExamDate(c2);
             clinicHub.confirmBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), 0.5 * clinicHub.getCurrentExam().getPrice());
-            date_string = "10-02-2023";
-            date = formatter.parse(date_string);
-            c.setTime(date);
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
-            clinicHub.chooseExamDate(c);
+            clinicHub.chooseExamDate(Calendar.getInstance());
             clinicHub.confirmBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), 0);
 
             // TEST REFUND RICOVERO
-            date_string = "11-03-2023";
-            date = formatter.parse(date_string);
-            c.setTime(date);
+            Calendar c3 = Calendar.getInstance();
+            c3.add(Calendar.DAY_OF_MONTH, 8);
             clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(c);
+            clinicHub.chooseHospitalization(c3);
             clinicHub.confirmHospitalization();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.5 * clinicHub.getCurrentHosp().getPrice());
-            date_string = "13-02-2023";
-            date = formatter.parse(date_string);
-            c.setTime(date);
+            Calendar c4 = Calendar.getInstance();
+            c4.add(Calendar.DAY_OF_MONTH, 4);
             clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(c);
+            clinicHub.chooseHospitalization(c4);
             clinicHub.confirmHospitalization();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.2 * clinicHub.getCurrentHosp().getPrice());
-            date_string = "10-02-2023";
-            date = formatter.parse(date_string);
-            c.setTime(date);
             clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(c);
+            clinicHub.chooseHospitalization(Calendar.getInstance());
             clinicHub.confirmHospitalization();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0);

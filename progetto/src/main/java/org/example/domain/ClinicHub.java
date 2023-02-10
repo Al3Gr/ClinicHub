@@ -102,7 +102,7 @@ public class ClinicHub {
                 currentHosp.setDoctor(m);
                 hospitalizationBookingRegister.addBooking(currentHosp);
             } catch(Exception e) {
-                System.out.println("Nessun paziente presente");
+                System.out.println("Nessun medico presente");
             }
         } else {
             throw new Exception("Ordine chiamata dei metodi errato");

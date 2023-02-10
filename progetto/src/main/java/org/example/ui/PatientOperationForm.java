@@ -35,6 +35,7 @@ public class PatientOperationForm extends JFrame{
     private JButton hospButton;
     private JComboBox examTypeCombo;
     private JButton prenotaEsameButton;
+    private JButton btnDeleteBooking;
 
     private ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -45,7 +46,7 @@ public class PatientOperationForm extends JFrame{
         clinicHub = ClinicHub.getInstance();
         setTitle("ClinicHub");
         setContentPane(mainPanel);
-        setMinimumSize(new Dimension(550, 500));
+        setMinimumSize(new Dimension(570, 500));
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -117,8 +118,23 @@ public class PatientOperationForm extends JFrame{
                     ArrayList<Date> dates = (ArrayList<Date>) clinicHub.newExamBooking((ExamType) examTypeCombo.getSelectedItem());
                     confirmExamFrame(dates);
                 } catch (Exception ex) {
-                    System.out.println(ex);
                     UtilityUI.alertFrame("Inserire dati!!!");
+                }
+            }
+        });
+
+        btnDeleteBooking.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(clinicHub.getCurrentPatient() != null){
+                    try {
+                        deleteBookingFrame();
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                    }
+
+                } else {
+                    UtilityUI.alertFrame("Verifica il paziente!!!");
                 }
             }
         });
@@ -140,7 +156,7 @@ public class PatientOperationForm extends JFrame{
 
         JFrame frame = new JFrame();
         frame.setMinimumSize(new Dimension(500, 200));
-        frame.setTitle("Conferma");
+        frame.setTitle("Conferma Ricovero");
 
         Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
@@ -202,6 +218,7 @@ public class PatientOperationForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     clinicHub.confirmHospitalization();
+                    System.out.println(clinicHub.getCurrentHosp().getCode());
                     frame.dispose();
                 } catch (Exception ex) {
                     UtilityUI.alertFrame("Errore sconosciuto");
@@ -231,7 +248,7 @@ public class PatientOperationForm extends JFrame{
     private void confirmExamFrame(List<Date> dates){
         JFrame frame = new JFrame();
         frame.setMinimumSize(new Dimension(730, 400));
-        frame.setTitle("Conferma");
+        frame.setTitle("Conferma Esame");
 
         Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
 
@@ -393,6 +410,7 @@ public class PatientOperationForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     clinicHub.confirmBooking();
+                    System.out.println(clinicHub.getCurrentExam().getCode());
                     frame.dispose();
                 } catch (Exception ex) {
                     UtilityUI.alertFrame("Errore sconosciuto");
@@ -411,6 +429,128 @@ public class PatientOperationForm extends JFrame{
         buttonPanel.add(annullaButton);
         buttonPanel.add(confirmButton);
 
+        m_panel.add(buttonPanel);
+
+        frame.add(m_panel);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private void deleteBookingFrame(){
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(500, 200));
+        frame.setTitle("Cancella Prenotazione");
+
+        Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+
+        JPanel m_panel = new JPanel(new GridLayout(5, 1));
+        m_panel.setBorder(padding);
+
+
+        JPanel bookingCodePanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel codelabel = new JLabel("Codice prenotazione:", SwingConstants.LEFT);
+        codelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JTextField codeField = new JTextField();
+
+        bookingCodePanel.add(codelabel);
+        bookingCodePanel.add(codeField);
+
+        JPanel typeBookingPanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel typelabel = new JLabel("Tipo prenotazione:", SwingConstants.LEFT);
+        typelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JPanel typeBookingButtonPanel = new JPanel(new GridLayout(1, 2));
+        ButtonGroup g = new ButtonGroup();
+        JRadioButton ricoveroButton = new JRadioButton("RICOVERO");
+        JRadioButton esameButton = new JRadioButton("ESAME");
+        g.add(ricoveroButton);
+        g.add(esameButton);
+        typeBookingButtonPanel.add(ricoveroButton);
+        typeBookingButtonPanel.add(esameButton);
+
+        typeBookingPanel.add(typelabel);
+        typeBookingPanel.add(typeBookingButtonPanel);
+
+
+
+        JButton searchButton = new JButton("Cerca prenotazione");
+
+        JPanel refundPanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel refundlabel = new JLabel("Rimborso dovuto:", SwingConstants.LEFT);
+        codelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JLabel refundlabel_info = new JLabel("", SwingConstants.LEFT);
+        setVisible(false);
+
+        refundPanel.add(refundlabel);
+        refundPanel.add(refundlabel_info);
+
+        JButton confirmButton = new JButton("Conferma");
+        confirmButton.setVisible(false);
+
+        JButton annullaButton = new JButton("Annulla");
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    if (ricoveroButton.isSelected()){
+                        clinicHub.checkBooking(Integer.parseInt(codeField.getText()), "RICOVERO");
+                        refundlabel_info.setText(String.valueOf(clinicHub.calculateRefund("RICOVERO")));
+                        refundlabel_info.setVisible(true);
+                        confirmButton.setVisible(true);
+                    } else if (esameButton.isSelected()) {
+                        clinicHub.checkBooking(Integer.parseInt(codeField.getText()), "ESAME");
+                        refundlabel_info.setText(String.valueOf(clinicHub.calculateRefund("ESAME")));
+                        refundlabel_info.setVisible(true);
+                        confirmButton.setVisible(true);
+                    } else {
+                        UtilityUI.alertFrame("Seleziona il tipo di registro!!!");
+                    }
+                }  catch (Exception ex) {
+                    UtilityUI.alertFrame("Codice non valido \n Utente diverso");
+                }
+            }
+        });
+
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (ricoveroButton.isSelected()){
+                        clinicHub.confirmCancel("RICOVERO");
+                    } else if (esameButton.isSelected()) {
+                        clinicHub.confirmCancel("ESAME");
+                    } else {
+                        UtilityUI.alertFrame("Seleziona il tipo di registro!!!");
+                    }
+                    frame.dispose();
+                } catch (Exception ex) {
+                    UtilityUI.alertFrame("Errore sconosciuto");
+                }
+            }
+        });
+
+        annullaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        JPanel buttonPanel = new JPanel(new GridLayout(1,2));
+        buttonPanel.add(annullaButton);
+        buttonPanel.add(confirmButton);
+
+
+        m_panel.add(bookingCodePanel);
+        m_panel.add(typeBookingPanel);
+        m_panel.add(searchButton);
+        m_panel.add(refundPanel);
         m_panel.add(buttonPanel);
 
         frame.add(m_panel);
