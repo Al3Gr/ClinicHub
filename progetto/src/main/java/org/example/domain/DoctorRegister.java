@@ -40,7 +40,7 @@ public class DoctorRegister {
 
     public Doctor getDoctor(String lastname) throws Exception{
         for (Doctor d: register.values()) {
-            if(d.getLastname() == lastname)
+            if(d.getLastname().toLowerCase().equals(lastname.toLowerCase()))
                 return d;
         }
         throw new Exception("Nessun dottore presente con quel cognome");

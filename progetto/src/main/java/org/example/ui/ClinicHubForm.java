@@ -13,6 +13,7 @@ public class ClinicHubForm extends JFrame {
     private JPanel welcomePanel;
     private JButton btnAddPatient;
     private JButton btnLoginPatient;
+    private JButton btnDeleteBooking;
 
     public ClinicHubForm(JFrame parent){
         super();
@@ -30,7 +31,7 @@ public class ClinicHubForm extends JFrame {
         btnLoginPatient.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new loginPatientForm(parent);
+                new PatientOperationForm(parent);
             }
         });
 

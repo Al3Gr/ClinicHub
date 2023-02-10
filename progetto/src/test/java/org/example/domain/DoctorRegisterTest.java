@@ -32,4 +32,14 @@ public class DoctorRegisterTest {
             fail("Unexpected exception");
         }
     }
+
+
+    @Test
+    void testGetDoctorByLastName() {
+        try {
+            assertNotNull(doctorRegister.getDoctor("fD"));
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
+    }
 }

@@ -120,11 +120,11 @@ public class ClinicHub {
     public void chooseDoctor(String lastname) throws Exception{
         if(currentExam != null) {
             try {
-                Doctor d = doctorRegister.getDoctor(lastname);
+                Doctor d = doctorRegister.getDoctor(lastname.toLowerCase());
                 currentExam.setDoctor(d);
                 currentExam.setPrice((float) (currentExam.getPrice() + 0.5*currentExam.getPrice()));
             } catch (Exception e) {
-                System.out.println("Nessun dottore trovato con quel cognome");
+                throw new Exception("Nessun dottore trovato con quel cognome");
             }
         } else {
             throw new Exception("Ordine chiamata dei metodi errato");

@@ -25,11 +25,10 @@ public class ExamBookingRegister {
         Exam e = register.get(codice);
         Calendar examCalendar = e.getBookingDate();
         Calendar now = Calendar.getInstance();
-        //TODO
         long diff = ((examCalendar.getTimeInMillis() - now.getTimeInMillis()) / (24 * 60 * 60 * 1000));
         if (diff >= 4) {
             return e.getPrice();
-        } else if (diff > 0 && diff <= 2) {
+        } else if (diff >= 2) {
             return (float) (0.5*(e.getPrice()));
         } else {
             return 0;

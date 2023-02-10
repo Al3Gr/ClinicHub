@@ -202,7 +202,7 @@ class ClinicHubTest {
             clinicHub.confirmBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), clinicHub.getCurrentExam().getPrice());
-            date_string = "11-02-2023";
+            date_string = "12-02-2023";
             date = formatter.parse(date_string);
             c.setTime(date);
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
