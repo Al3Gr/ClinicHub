@@ -95,6 +95,15 @@ public class Exam implements Observable<ExamBookingRegister> {
         }
     }
 
+    public String getResultInfo() throws Exception{
+        if (result != null) {
+            return result.getInfo();
+        } else {
+            throw new Exception("Ordine chiamata metodi non rispettato");
+        }
+
+    }
+
     private class Result {
         private final String info;
 

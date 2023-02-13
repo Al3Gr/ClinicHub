@@ -12,6 +12,7 @@ public class ClinicHub {
     private Hospitalization currentHosp;
     private Exam currentExam;
     private Doctor currentDoctor;
+    private EmailService emailService;
     private final DoctorRegister doctorRegister;
     private final ExamBookingRegister examBookingRegister;
     private final HospitalizationBookingRegister hospitalizationBookingRegister;
@@ -116,6 +117,7 @@ public class ClinicHub {
         Utility.loadDoctor();
         this.hospitalizationBookingRegister = HospitalizationBookingRegister.getInstance();
         this.examBookingRegister=ExamBookingRegister.getInstance();
+        this.emailService = EmailService.getIstance();
     }
 
     public void chooseDoctor(String lastname) throws Exception{
@@ -240,6 +242,14 @@ public class ClinicHub {
     public void selectExamReady(int code, String info) {
         currentExam = examBookingRegister.getExam(code);
         currentExam.setState(info);
+    }
+
+    public boolean sendResultForEmail() throws Exception{
+        if (currentExam != null) {
+            return emailService.sendResult(currentExam, currentExam.getResultInfo());
+        } else {
+            throw new Exception("Ordine di chiamata dei metodi non rispettato");
+        }
     }
 
 }
