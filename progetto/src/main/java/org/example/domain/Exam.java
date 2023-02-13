@@ -1,10 +1,13 @@
 package org.example.domain;
 
+import javafx.beans.InvalidationListener;
+import org.example.interfaces.Observable;
+
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.*;
 
-public class Exam {
+public class Exam implements Observable<ExamBookingRegister> {
     private float price;
     private int code;
     private Calendar bookingDate;
@@ -12,7 +15,13 @@ public class Exam {
     private LocalTime time;
     private Patient patient;
     private Doctor doctor;
+
+    private Result result;
+
+    private boolean stateReady = false;
     private final ExamType type;
+
+    private List<ExamBookingRegister> observers = new ArrayList<>();
 
     public void setCode(int code) {
         this.code = code;
@@ -30,6 +39,23 @@ public class Exam {
     public LocalTime getTime() {return time;}
     public void setPatient(Patient p) {this.patient=p;}
     public void setDoctor(Doctor d) {this.doctor=d;}
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public Doctor getDoctor(){
+        return doctor;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
     public Exam(ExamType type){
         this.type=type;
         this.code= new Random().nextInt();
@@ -45,15 +71,39 @@ public class Exam {
         readyDate.add(Calendar.DAY_OF_MONTH, type.getDaysToReady());
 
     }
-    public void setTime(LocalTime time) {
-        this.time = time;
+
+    public void setState(String info) {
+        this.stateReady = true;
+        result = new Result(info);
+        notifyObserver();
     }
 
-    public Doctor getDoctor(){
-        return doctor;
+    @Override
+    public void addObserver(ExamBookingRegister observer) {
+        observers.add(observer);
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    @Override
+    public void removeObserver(ExamBookingRegister observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for (ExamBookingRegister e : observers) {
+            e.update(this);
+        }
+    }
+
+    private class Result {
+        private final String info;
+
+        public Result(String info) {
+            this.info = info;
+        }
+
+        public String getInfo() {
+            return info;
+        }
     }
 }

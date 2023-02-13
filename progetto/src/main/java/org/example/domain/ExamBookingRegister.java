@@ -1,12 +1,14 @@
 package org.example.domain;
 
+import org.example.interfaces.Observer;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.time.*;
 
-public class ExamBookingRegister {
+public class ExamBookingRegister implements Observer<Exam> {
     private final Map<Integer, Exam> register;
     private static ExamBookingRegister examBookingRegister;
 
@@ -19,7 +21,10 @@ public class ExamBookingRegister {
     }
     private ExamBookingRegister(){this.register = new HashMap<>();}
 
-    public void addBooking(Exam exam){register.put(exam.getCode(), exam);}
+    public void addBooking(Exam exam){
+        register.put(exam.getCode(), exam);
+        exam.addObserver(this);
+    }
 
     public float getRefund(int codice){
         Exam e = register.get(codice);
@@ -47,4 +52,12 @@ public class ExamBookingRegister {
     public Exam getExam(int codice){
         return register.get(codice);
     }
+
+    @Override
+    public void update(Exam observable) {
+        observable.removeObserver(this);
+        register.remove(observable.getCode());
+    }
+
+
 }
