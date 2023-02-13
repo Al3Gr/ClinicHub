@@ -252,4 +252,9 @@ public class ClinicHub {
         }
     }
 
+    public boolean addDoctor(String nome, String cognome, Date dataNascita, String cf, String telefono, String email) {
+        currentDoctor = new Doctor();
+        return true;
+    }
+
 }
