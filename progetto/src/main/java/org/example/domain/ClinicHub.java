@@ -237,5 +237,9 @@ public class ClinicHub {
         }
     }
 
+    public void selectExamReady(int code, String info) {
+        currentExam = examBookingRegister.getExam(code);
+        currentExam.setState(info);
+    }
 
 }

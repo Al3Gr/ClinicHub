@@ -60,6 +60,7 @@ public class ExamBookingRegister implements Observer<Exam> {
         register.remove(observable.getCode());
     }
 
+    //TODO
     public List<Exam> getTodayExamByDoc(Doctor d) {
         return null;
     }
