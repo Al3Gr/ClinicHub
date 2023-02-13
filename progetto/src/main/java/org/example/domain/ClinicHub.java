@@ -11,6 +11,7 @@ public class ClinicHub {
     private Patient currentPatient;
     private Hospitalization currentHosp;
     private Exam currentExam;
+    private Doctor currentDoctor;
     private final DoctorRegister doctorRegister;
     private final ExamBookingRegister examBookingRegister;
     private final HospitalizationBookingRegister hospitalizationBookingRegister;
@@ -225,6 +226,15 @@ public class ClinicHub {
             hospitalizationBookingRegister.remove(currentHosp.getCode());
         }
 
+    }
+
+    public List<Exam> loginMed(String cf) throws Exception{
+        try {
+            currentDoctor = doctorRegister.getDoctorByCf(cf);
+            return examBookingRegister.getTodayExamByDoc(currentDoctor);
+        } catch(Exception e) {
+            throw new Exception("Nessun medico trovato con il codice fiscale indicato");
+        }
     }
 
 

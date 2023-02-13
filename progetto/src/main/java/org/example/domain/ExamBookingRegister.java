@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import java.time.*;
 
 public class ExamBookingRegister implements Observer<Exam> {
@@ -57,6 +58,10 @@ public class ExamBookingRegister implements Observer<Exam> {
     public void update(Exam observable) {
         observable.removeObserver(this);
         register.remove(observable.getCode());
+    }
+
+    public List<Exam> getTodayExamByDoc(Doctor d) {
+        return null;
     }
 
 
