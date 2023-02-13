@@ -257,4 +257,12 @@ public class ClinicHub {
         return true;
     }
 
+    public void confirmDoctor() throws Exception{
+        if (currentDoctor != null) {
+            doctorRegister.addDoctor(currentDoctor);
+        } else {
+            throw new Exception("Ordine di chiamata dei metodi non rispettato");
+        }
+    }
+
 }
