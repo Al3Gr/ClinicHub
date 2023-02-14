@@ -306,4 +306,11 @@ class ClinicHubTest {
         }
     }
 
+    @Test
+    void testAddDoctor() {
+        boolean result = clinicHub.addDoctor("Carlo","Bianchi", Calendar.getInstance().getTime(), "cf55", "3333333333", "cb@gmail.com");
+        assertTrue(result);
+        assertNotNull(clinicHub.getCurrentDoctor());
+    }
+
 }

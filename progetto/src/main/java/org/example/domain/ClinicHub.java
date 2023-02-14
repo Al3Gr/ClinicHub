@@ -255,9 +255,15 @@ public class ClinicHub {
         }
     }
 
+
     public boolean addDoctor(String nome, String cognome, Date dataNascita, String cf, String telefono, String email) {
-        currentDoctor = new Doctor(nome, cognome, dataNascita, cf, email, telefono);
-        return true;
+        try {
+            Doctor d = doctorRegister.getDoctorByCf(cf);
+        } catch (Exception e) {
+            currentDoctor = new Doctor(nome, cognome, dataNascita, cf, email, telefono);
+            return true;
+        }
+        return false;
     }
 
     public void confirmDoctor() throws Exception{
