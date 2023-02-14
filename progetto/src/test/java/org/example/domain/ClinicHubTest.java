@@ -313,4 +313,14 @@ class ClinicHubTest {
         assertNotNull(clinicHub.getCurrentDoctor());
     }
 
+    @Test
+    void testConfirmDoctor() {
+        try {
+            clinicHub.addDoctor("Carlo","Bianchi", Calendar.getInstance().getTime(), "cf55", "3333333333", "cb@gmail.com");
+            clinicHub.confirmDoctor();
+            assertEquals(3, DoctorRegister.getInstance().getSize());
+        } catch(Exception e) {
+            fail("Unexpected exception");
+        }
+    }
 }
