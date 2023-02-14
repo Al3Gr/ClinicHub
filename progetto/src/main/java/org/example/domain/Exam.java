@@ -99,7 +99,7 @@ public class Exam implements Observable<ExamBookingRegister> {
         if (result != null) {
             return result.getInfo();
         } else {
-            throw new Exception("Ordine chiamata metodi non rispettato");
+            throw new Exception("result is null");
         }
 
     }

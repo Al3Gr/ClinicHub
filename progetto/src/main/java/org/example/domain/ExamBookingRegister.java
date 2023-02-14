@@ -47,8 +47,13 @@ public class ExamBookingRegister implements Observer<Exam> {
         return e.getPatient().equals(p);
     }
 
-    public Exam getExam(int codice){
-        return register.get(codice);
+    public Exam getExam(int codice) throws Exception {
+        Exam e = register.get(codice);
+        if(e != null) {
+            return e;
+        } else {
+            throw new Exception("Nessun esame presente con quel codice");
+        }
     }
 
     public List<Exam> getTodayExamByDoc(Doctor d){

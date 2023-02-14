@@ -237,7 +237,7 @@ public class ClinicHub {
         }
     }
 
-    public void selectExamReady(int code, String info) {
+    public void selectExamReady(int code, String info) throws Exception {
         currentExam = examBookingRegister.getExam(code);
         currentExam.setState(info);
     }
