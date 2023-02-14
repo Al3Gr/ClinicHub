@@ -46,7 +46,7 @@ public class DoctorRegisterTest {
     @Test
     void testGetDoctorByCf() {
         try {
-            assertNotNull(doctorRegister.getDoctorByCf("cf0"));
+            assertNotNull(doctorRegister.getDoctorByCf("cf1"));
         } catch(Exception e) {
             fail("Unexpected exception");
         }
