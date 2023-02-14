@@ -47,7 +47,8 @@ public class Utility {
         return times;
     }
 
-    public static void loadTodayExams(Doctor d){
+    public static void loadTodayExams(){
+        Doctor d = new Doctor("Eleonora", "Fd", new Date(), "cf1", "el.fg@gmail.com", "333444555");
         Exam e =new Exam(ExamType.BLOOD_ANALYSIS);
         e.setDoctor(d);
         e.setReadyDateToday(Calendar.getInstance());

@@ -99,7 +99,6 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     @Override
     public void notifyObserver() {
-        System.out.println("ciao da notify");
         for (ExamBookingRegister e : observers) {
             e.update(this);
         }

@@ -42,9 +42,8 @@ public class ExamBookingRegisterTest {
     @Test
     void testGetTodayExamByDoc() {
         try {
-            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
-            DoctorRegister.getInstance().addDoctor(d);
-            Utility.loadTodayExams(d);
+            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf1", "gio.fr@gmail.com", "3298888555");
+            Utility.loadTodayExams();
             List<Exam> exams= examBookingRegister.getTodayExamByDoc(d);
             assertEquals(2,exams.size());
         } catch (Exception e) {

@@ -273,9 +273,7 @@ class ClinicHubTest {
     @Test
     void testLoginMed() {
         try{
-            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
-            DoctorRegister.getInstance().addDoctor(d);
-            clinicHub.loginMed("cf4");
+            clinicHub.loginMed("cf1");
             assertNotNull(clinicHub.getCurrentDoctor());
         }catch(Exception e){
             fail("Unexpected exception");
@@ -285,13 +283,10 @@ class ClinicHubTest {
     @Test
     void testSelectExamReady() {
         try{
-            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
-            DoctorRegister.getInstance().addDoctor(d);
-            clinicHub.loginMed("cf4");
-            Utility.loadTodayExams(d);
+            Utility.loadTodayExams();
             Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
-            currentExam.setState("esame pronto");
-            assertEquals(true,currentExam.getState());
+            clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
+            assertTrue(currentExam.getState());
             assertNotNull(currentExam.getResult());
         }catch(Exception e){
             fail("Unexpected exception");
@@ -301,12 +296,10 @@ class ClinicHubTest {
     @Test
     void testSendResultForEmail() {
         try{
-            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
-            DoctorRegister.getInstance().addDoctor(d);
-            Utility.loadTodayExams(d);
+            Utility.loadTodayExams();
             Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
-            currentExam.setState("esame pronto");
-            assertEquals(true,EmailService.sendResult(currentExam, currentExam.getResultInfo()));
+            clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
+            assertTrue(clinicHub.sendResultForEmail());
         }catch(Exception e){
             fail("Unexpected exception");
         }
