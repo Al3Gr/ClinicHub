@@ -113,9 +113,10 @@ public class ClinicHub {
     private ClinicHub(){
         this.patientRegister = Utility.loadPatient();
         this.doctorRegister = DoctorRegister.getInstance();
-        Utility.loadDoctor();
         this.hospitalizationBookingRegister = HospitalizationBookingRegister.getInstance();
         this.examBookingRegister=ExamBookingRegister.getInstance();
+        Utility.loadDoctor();
+        Utility.loadTodayExams();
     }
 
     public void chooseDoctor(String lastname) throws Exception{

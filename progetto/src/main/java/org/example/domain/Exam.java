@@ -114,6 +114,13 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     }
 
+    @Override
+    public String toString() {
+        return "Codice: " + code +
+                "\tPaziente: " + patient.getCf() +
+                "\tTipo: " + type;
+    }
+
     private class Result {
         private final String info;
 

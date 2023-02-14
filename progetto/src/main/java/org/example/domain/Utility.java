@@ -49,15 +49,17 @@ public class Utility {
 
     public static void loadTodayExams(){
         Doctor d = new Doctor("Eleonora", "Fd", LocalDate.now(), "cf1", "el.fg@gmail.com", "333444555");
+        Patient p= new Patient("Mario", "Rossi", LocalDate.now(), "via mario rossi 10", "cf12345", "000111555", "prova@gmail.com");
+        Patient p1= new Patient("Topolino", "Rossi", LocalDate.now(), "via mario rossi 10", "cf4040", "000111555", "prova@gmail.com");
         Exam e =new Exam(ExamType.BLOOD_ANALYSIS);
         e.setDoctor(d);
+        e.setPatient(p);
         e.setReadyDateToday(Calendar.getInstance());
         ExamBookingRegister.getInstance().addBooking(e);
         e=new Exam(ExamType.ELECTROMYOGRAPHY);
         e.setReadyDateToday(Calendar.getInstance());
         e.setDoctor(d);
-        Patient p= new Patient("Mario", "Rossi", LocalDate.now(), "via mario rossi 10", "cf12345", "000111555", "prova@gmail.com");
-        e.setPatient(p);
+        e.setPatient(p1);
         e.setCode(1);
         ExamBookingRegister.getInstance().addBooking(e);
     }
