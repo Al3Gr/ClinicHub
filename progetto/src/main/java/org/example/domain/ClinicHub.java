@@ -246,7 +246,9 @@ public class ClinicHub {
         if (currentExam != null) {
             return EmailService.sendResult(currentExam, currentExam.getResultInfo());
         } else {
+            System.out.println("d");
             throw new Exception("Ordine di chiamata dei metodi non rispettato");
+
         }
     }
 
