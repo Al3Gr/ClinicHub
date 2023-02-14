@@ -60,7 +60,7 @@ public class ExamBookingRegister implements Observer<Exam> {
         Date now = Calendar.getInstance().getTime();
         List<Exam> list = new ArrayList<>();
         for(Exam e: register.values()){
-            if((e.getDoctor().equals(d)) && (now.compareTo(e.getBookingDate().getTime()) == 0)){
+            if((e.getDoctor().equals(d)) && (now.compareTo(e.getReadyDate().getTime()) >= 0)){
                 list.add(e);
             }
         }
