@@ -277,9 +277,6 @@ class ClinicHubTest {
             DoctorRegister.getInstance().addDoctor(d);
             clinicHub.loginMed("cf4");
             assertNotNull(clinicHub.getCurrentDoctor());
-            /*Utility.loadTodayExams(d);
-            List<Exam> exams= ExamBookingRegister.getInstance().getTodayExamByDoc(d);
-            assertEquals(2,exams.size());*/
         }catch(Exception e){
             fail("Unexpected exception");
         }
@@ -295,6 +292,7 @@ class ClinicHubTest {
             Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
             currentExam.setState("esame pronto");
             assertEquals(true,currentExam.getState());
+            assertNotNull(currentExam.getResult());
         }catch(Exception e){
             fail("Unexpected exception");
         }
