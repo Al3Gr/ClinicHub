@@ -283,4 +283,19 @@ class ClinicHubTest {
         }
     }
 
+    @Test
+    void testSelectExamReady() {
+        try{
+            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
+            DoctorRegister.getInstance().addDoctor(d);
+            Utility.loadTodayExams(d);
+            Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
+            currentExam.setState("esame pronto");
+            System.out.println(currentExam.getState());
+            assertEquals(1,currentExam.getState());
+        }catch(Exception e){
+            fail("Unexpected exception");
+        }
+    }
+
 }

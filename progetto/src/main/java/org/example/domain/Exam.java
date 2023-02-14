@@ -80,6 +80,11 @@ public class Exam implements Observable<ExamBookingRegister> {
         this.stateReady = true;
         result = new Result(info);
         notifyObserver();
+        System.out.println("ciao"); //DA LEVARE
+    }
+
+    public boolean getState(){
+        return stateReady;
     }
 
     @Override
