@@ -50,10 +50,10 @@ public class Utility {
     public static void loadTodayExams(Doctor d){
         Exam e =new Exam(ExamType.BLOOD_ANALYSIS);
         e.setDoctor(d);
-        e.setReadyDateToday();
+        e.setReadyDateToday(Calendar.getInstance());
         ExamBookingRegister.getInstance().addBooking(e);
         e=new Exam(ExamType.ELECTROMYOGRAPHY);
-        e.setReadyDateToday();
+        e.setReadyDateToday(Calendar.getInstance());
         e.setDoctor(d);
         e.setCode(1);
         ExamBookingRegister.getInstance().addBooking(e);

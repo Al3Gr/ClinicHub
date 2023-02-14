@@ -21,7 +21,7 @@ public class Exam implements Observable<ExamBookingRegister> {
     private boolean stateReady = false;
     private final ExamType type;
 
-    private List<ExamBookingRegister> observers = new ArrayList<>();
+    private List<ExamBookingRegister> observers;
 
     public void setCode(int code) {
         this.code = code;
@@ -60,6 +60,7 @@ public class Exam implements Observable<ExamBookingRegister> {
         this.type=type;
         this.code= new Random().nextInt();
         this.price=type.getPrice();
+        this.observers = new ArrayList<>();
     }
     public void setData(Calendar data) {
         this.bookingDate=data;
@@ -72,8 +73,8 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     }
 
-    public void setReadyDateToday(){
-        readyDate=Calendar.getInstance();
+    public void setReadyDateToday(Calendar data){
+        readyDate=data;
     }
 
     public void setState(String info) {
@@ -99,10 +100,12 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     @Override
     public void notifyObserver() {
+        System.out.println("ciao da notify");
         for (ExamBookingRegister e : observers) {
             e.update(this);
         }
     }
+
 
     public String getResultInfo() throws Exception{
         if (result != null) {

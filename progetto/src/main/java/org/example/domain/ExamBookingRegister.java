@@ -69,7 +69,6 @@ public class ExamBookingRegister implements Observer<Exam> {
 
     @Override
     public void update(Exam observable) {
-        observable.removeObserver(this);
         register.remove(observable.getCode());
     }
 

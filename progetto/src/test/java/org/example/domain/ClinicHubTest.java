@@ -291,8 +291,7 @@ class ClinicHubTest {
             Utility.loadTodayExams(d);
             Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
             currentExam.setState("esame pronto");
-            System.out.println(currentExam.getState());
-            assertEquals(1,currentExam.getState());
+            assertEquals(true,currentExam.getState());
         }catch(Exception e){
             fail("Unexpected exception");
         }
