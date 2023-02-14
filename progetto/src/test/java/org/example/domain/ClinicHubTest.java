@@ -126,6 +126,7 @@ class ClinicHubTest {
         try {
             clinicHub.loginPatient("cf2");
             ArrayList<Date> dates = (ArrayList<Date>)clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
+            assertEquals(dates.size(),31);
             assertNotNull(clinicHub.getCurrentExam());
         } catch (Exception e) {
             fail("Unexpected exception");
