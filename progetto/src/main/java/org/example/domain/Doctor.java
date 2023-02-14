@@ -69,4 +69,13 @@ public class Doctor {
         this.e_mail = e_mail;
         this.telephone = telephone;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+        final Doctor d = (Doctor) obj;
+        return this.cf == d.cf;
+    }
 }

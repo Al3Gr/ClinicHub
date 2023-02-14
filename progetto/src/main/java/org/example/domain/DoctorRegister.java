@@ -46,12 +46,15 @@ public class DoctorRegister {
         throw new Exception("Nessun dottore presente con quel cognome");
     }
 
-    public Doctor getDoctorByCf(String cf) throws Exception{
-        for (Doctor d: register.values()) {
-            if(d.getCf().toLowerCase().equals(cf.toLowerCase()))
-                return d;
+
+
+    public Doctor getDoctorByCf(String cf) throws Exception {
+        Doctor d = register.get(cf);
+        if(d != null) {
+            return d;
+        } else {
+            throw new Exception("Nessun dottore presente con quel codice fiscale");
         }
-        throw new Exception("Nessun dottore presente con il codice fiscale indicato");
     }
 
 }

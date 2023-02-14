@@ -2,10 +2,7 @@ package org.example.domain;
 
 import org.example.interfaces.Observer;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.List;
 import java.time.*;
 
@@ -54,16 +51,23 @@ public class ExamBookingRegister implements Observer<Exam> {
         return register.get(codice);
     }
 
+    public List<Exam> getTodayExamByDoc(Doctor d){
+        Date now = Calendar.getInstance().getTime();
+        List<Exam> list = new ArrayList<>();
+        for(Exam e: register.values()){
+            if((e.getDoctor().equals(d)) && (now.compareTo(e.getBookingDate().getTime()) == 0)){
+                list.add(e);
+            }
+        }
+        return list;
+    }
+
     @Override
     public void update(Exam observable) {
         observable.removeObserver(this);
         register.remove(observable.getCode());
     }
 
-    //TODO
-    public List<Exam> getTodayExamByDoc(Doctor d) {
-        return null;
-    }
 
 
 }
