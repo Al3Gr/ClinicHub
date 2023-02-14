@@ -42,4 +42,13 @@ public class DoctorRegisterTest {
             fail("Unexpected exception");
         }
     }
+
+    @Test
+    void testGetDoctorByCf() {
+        try {
+            assertNotNull(doctorRegister.getDoctorByCf("cf0"));
+        } catch(Exception e) {
+            fail("Unexpected exception");
+        }
+    }
 }
