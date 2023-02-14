@@ -3,7 +3,7 @@ package org.example.domain;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class EmailService {
+public class  EmailService {
 
     public static boolean sendResult(Exam e, String info) {
         String filename= e.getPatient().getLastname() + "_" + e.getPatient().getName() + ".txt";

@@ -237,6 +237,10 @@ public class ClinicHub {
         }
     }
 
+    public Doctor getCurrentDoctor() {
+        return currentDoctor;
+    }
+
     public void selectExamReady(int code, String info) throws Exception {
         currentExam = examBookingRegister.getExam(code);
         currentExam.setState(info);

@@ -2,6 +2,10 @@ package org.example.domain;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExamBookingRegisterTest {
@@ -30,6 +34,19 @@ public class ExamBookingRegisterTest {
             examBookingRegister.addBooking(e);
             boolean risultato = examBookingRegister.checkPatient(e.getCode(),clinicHub.getCurrentPatient());
             assertTrue(risultato);
+        } catch (Exception e) {
+            fail("Unexpected exception");
+        }
+    }
+
+    @Test
+    void testGetTodayExamByDoc() {
+        try {
+            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
+            DoctorRegister.getInstance().addDoctor(d);
+            Utility.loadTodayExams(d);
+            List<Exam> exams= ExamBookingRegister.getInstance().getTodayExamByDoc(d);
+            assertEquals(2,exams.size());
         } catch (Exception e) {
             fail("Unexpected exception");
         }

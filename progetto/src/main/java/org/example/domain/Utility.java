@@ -55,6 +55,8 @@ public class Utility {
         e=new Exam(ExamType.ELECTROMYOGRAPHY);
         e.setReadyDateToday(Calendar.getInstance());
         e.setDoctor(d);
+        Patient p= new Patient("Mario", "Rossi", LocalDate.now(), "via mario rossi 10", "cf12345", "000111555", "prova@gmail.com");
+        e.setPatient(p);
         e.setCode(1);
         ExamBookingRegister.getInstance().addBooking(e);
     }

@@ -275,9 +275,11 @@ class ClinicHubTest {
         try{
             Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
             DoctorRegister.getInstance().addDoctor(d);
-            Utility.loadTodayExams(d);
+            clinicHub.loginMed("cf4");
+            assertNotNull(clinicHub.getCurrentDoctor());
+            /*Utility.loadTodayExams(d);
             List<Exam> exams= ExamBookingRegister.getInstance().getTodayExamByDoc(d);
-            assertEquals(2,exams.size());
+            assertEquals(2,exams.size());*/
         }catch(Exception e){
             fail("Unexpected exception");
         }
@@ -288,10 +290,25 @@ class ClinicHubTest {
         try{
             Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
             DoctorRegister.getInstance().addDoctor(d);
+            clinicHub.loginMed("cf4");
             Utility.loadTodayExams(d);
             Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
             currentExam.setState("esame pronto");
             assertEquals(true,currentExam.getState());
+        }catch(Exception e){
+            fail("Unexpected exception");
+        }
+    }
+
+    @Test
+    void testSendResultForEmail() {
+        try{
+            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
+            DoctorRegister.getInstance().addDoctor(d);
+            Utility.loadTodayExams(d);
+            Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
+            currentExam.setState("esame pronto");
+            assertEquals(true,EmailService.sendResult(currentExam, currentExam.getResultInfo()));
         }catch(Exception e){
             fail("Unexpected exception");
         }
