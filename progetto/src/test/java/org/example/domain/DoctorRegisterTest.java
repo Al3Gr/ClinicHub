@@ -3,6 +3,7 @@ package org.example.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +20,7 @@ public class DoctorRegisterTest {
 
     @Test
     void testAddDoctor() {
-        Doctor d3 = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
+        Doctor d3 = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf4", "gio.fr@gmail.com", "3298888555");
         doctorRegister.addDoctor(d3);
         assertEquals(3,doctorRegister.getSize());
     }

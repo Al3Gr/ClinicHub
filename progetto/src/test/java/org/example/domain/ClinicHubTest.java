@@ -308,7 +308,7 @@ class ClinicHubTest {
 
     @Test
     void testAddDoctor() {
-        boolean result = clinicHub.addDoctor("Carlo","Bianchi", Calendar.getInstance().getTime(), "cf55", "3333333333", "cb@gmail.com");
+        boolean result = clinicHub.addDoctor("Carlo","Bianchi", LocalDate.now(), "cf55", "3333333333", "cb@gmail.com");
         assertTrue(result);
         assertNotNull(clinicHub.getCurrentDoctor());
     }
@@ -316,7 +316,7 @@ class ClinicHubTest {
     @Test
     void testConfirmDoctor() {
         try {
-            clinicHub.addDoctor("Carlo","Bianchi", Calendar.getInstance().getTime(), "cf45", "3333333333", "cb@gmail.com");
+            clinicHub.addDoctor("Carlo","Bianchi", LocalDate.now(), "cf45", "3333333333", "cb@gmail.com");
             clinicHub.confirmDoctor();
             assertEquals(3, DoctorRegister.getInstance().getSize());
         } catch(Exception e) {

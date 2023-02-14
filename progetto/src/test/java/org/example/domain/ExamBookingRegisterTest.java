@@ -3,6 +3,7 @@ package org.example.domain;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.*;
 
@@ -42,7 +43,7 @@ public class ExamBookingRegisterTest {
     @Test
     void testGetTodayExamByDoc() {
         try {
-            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf1", "gio.fr@gmail.com", "3298888555");
+            Doctor d = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf1", "gio.fr@gmail.com", "3298888555");
             Utility.loadTodayExams();
             List<Exam> exams= examBookingRegister.getTodayExamByDoc(d);
             assertEquals(2,exams.size());

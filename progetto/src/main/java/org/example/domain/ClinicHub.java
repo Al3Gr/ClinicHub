@@ -256,7 +256,7 @@ public class ClinicHub {
     }
 
 
-    public boolean addDoctor(String nome, String cognome, Date dataNascita, String cf, String telefono, String email) {
+    public boolean addDoctor(String nome, String cognome, LocalDate dataNascita, String cf, String telefono, String email) {
         try {
             Doctor d = doctorRegister.getDoctorByCf(cf);
         } catch (Exception e) {

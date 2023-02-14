@@ -1,11 +1,12 @@
 package org.example.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Doctor {
     private String name;
     private String lastname;
-    private Date birthday;
+    private LocalDate birthday;
     private String cf;
     private String e_mail;
     private String telephone;
@@ -26,11 +27,11 @@ public class Doctor {
         this.lastname = lastname;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -61,7 +62,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String name, String lastname, Date birthday, String cf, String e_mail, String telephone) {
+    public Doctor(String name, String lastname, LocalDate birthday, String cf, String e_mail, String telephone) {
         this.name = name;
         this.lastname = lastname;
         this.birthday = birthday;
