@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -268,4 +269,18 @@ class ClinicHubTest {
             fail("Unexpected exception");
         }
     }
+
+    @Test
+    void testLoginMed() {
+        try{
+            Doctor d = new Doctor("Giovanni", "Fr", new Date(), "cf4", "gio.fr@gmail.com", "3298888555");
+            DoctorRegister.getInstance().addDoctor(d);
+            Utility.loadTodayExams(d);
+            List<Exam> exams= ExamBookingRegister.getInstance().getTodayExamByDoc(d);
+            assertEquals(2,exams.size());
+        }catch(Exception e){
+            fail("Unexpected exception");
+        }
+    }
+
 }

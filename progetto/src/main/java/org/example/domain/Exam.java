@@ -72,6 +72,10 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     }
 
+    public void setReadyDateToday(){
+        readyDate=Calendar.getInstance();
+    }
+
     public void setState(String info) {
         this.stateReady = true;
         result = new Result(info);

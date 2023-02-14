@@ -47,5 +47,20 @@ public class Utility {
         return times;
     }
 
+    public static void loadTodayExams(Doctor d){
+        //ArrayList<Exam> exams= new ArrayList<>();
+        Exam e =new Exam(ExamType.BLOOD_ANALYSIS);
+        e.setDoctor(d);
+        e.setReadyDateToday();
+        ExamBookingRegister.getInstance().addBooking(e);
+        //exams.add(e);
+        e=new Exam(ExamType.ELECTROMYOGRAPHY);
+        e.setReadyDateToday();
+        e.setDoctor(d);
+        ExamBookingRegister.getInstance().addBooking(e);
+        //exams.add(e);
+        //return exams;
+    }
+
 
 }
