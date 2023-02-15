@@ -39,7 +39,7 @@ public class ClinicHubForm extends JFrame {
         addDocButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new addPatientForm(parent);
+                new addDoctorForm(parent);
             }
         });
 
