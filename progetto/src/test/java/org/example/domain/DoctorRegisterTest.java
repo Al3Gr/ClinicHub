@@ -9,12 +9,10 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DoctorRegisterTest {
-    static ClinicHub clinicHub;
     static DoctorRegister doctorRegister;
 
     @BeforeAll
     public static void initTest(){
-        clinicHub = ClinicHub.getInstance();
         doctorRegister = DoctorRegister.getInstance();
     }
 
@@ -22,7 +20,7 @@ public class DoctorRegisterTest {
     void testAddDoctor() {
         Doctor d3 = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf4", "gio.fr@gmail.com", "3298888555");
         doctorRegister.addDoctor(d3);
-        assertEquals(3,doctorRegister.getSize());
+        assertEquals(1,doctorRegister.getSize());
     }
 
     @Test
@@ -38,7 +36,9 @@ public class DoctorRegisterTest {
     @Test
     void testGetDoctorByLastName() {
         try {
-            assertNotNull(doctorRegister.getDoctor("fD"));
+            Doctor d3 = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf4", "gio.fr@gmail.com", "3298888555");
+            doctorRegister.addDoctor(d3);
+            assertNotNull(doctorRegister.getDoctor("Fr"));
         } catch (Exception e) {
             fail("Unexpected exception");
         }
@@ -47,7 +47,9 @@ public class DoctorRegisterTest {
     @Test
     void testGetDoctorByCf() {
         try {
-            assertNotNull(doctorRegister.getDoctorByCf("cf1"));
+            Doctor d3 = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf4", "gio.fr@gmail.com", "3298888555");
+            doctorRegister.addDoctor(d3);
+            assertNotNull(doctorRegister.getDoctorByCf("cf4"));
         } catch(Exception e) {
             fail("Unexpected exception");
         }

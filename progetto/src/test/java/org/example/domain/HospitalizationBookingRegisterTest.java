@@ -2,15 +2,16 @@ package org.example.domain;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HospitalizationBookingRegisterTest {
-    static ClinicHub clinicHub;
     static HospitalizationBookingRegister hospitalizationBookingRegister;
 
     @BeforeAll
     public static void initTest(){
-        clinicHub = ClinicHub.getInstance();
         hospitalizationBookingRegister = HospitalizationBookingRegister.getInstance();
     }
 
@@ -24,11 +25,11 @@ public class HospitalizationBookingRegisterTest {
     @Test
     void testCheckPatient() {
         try {
-            clinicHub.loginPatient("cf2");
+            Patient p = new Patient("testName", "testLastname", LocalDate.now(), "testRecidence", "testCf", "testTel","testEmail");
             Hospitalization h = HospitalizationFactory.getNewHospitalization("DAILY", Operation.VASECTOMY);
-            h.setPatient(clinicHub.getCurrentPatient());
+            h.setPatient(p);
             hospitalizationBookingRegister.addBooking(h);
-            boolean risultato = hospitalizationBookingRegister.checkPatient(h.getCode(),clinicHub.getCurrentPatient());
+            boolean risultato = hospitalizationBookingRegister.checkPatient(h.getCode(),p);
             assertTrue(risultato);
         } catch (Exception e) {
             fail("Unexpected exception");

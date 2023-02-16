@@ -10,12 +10,10 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ExamBookingRegisterTest {
-    static ClinicHub clinicHub;
     static ExamBookingRegister examBookingRegister;
 
     @BeforeAll
     public static void initTest() {
-        clinicHub = ClinicHub.getInstance();
         examBookingRegister = ExamBookingRegister.getInstance();
     }
 
@@ -29,11 +27,11 @@ public class ExamBookingRegisterTest {
     @Test
     void testCheckPatient() {
         try {
-            clinicHub.loginPatient("cf2");
+            Patient p = new Patient("testName", "testLastname", LocalDate.now(), "testRecidence", "testCf", "testTel","testEmail");
             Exam e = new Exam(ExamType.BLOOD_ANALYSIS);
-            e.setPatient(clinicHub.getCurrentPatient());
+            e.setPatient(p);
             examBookingRegister.addBooking(e);
-            boolean risultato = examBookingRegister.checkPatient(e.getCode(),clinicHub.getCurrentPatient());
+            boolean risultato = examBookingRegister.checkPatient(e.getCode(),p);
             assertTrue(risultato);
         } catch (Exception e) {
             fail("Unexpected exception");
