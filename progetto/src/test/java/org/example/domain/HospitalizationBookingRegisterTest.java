@@ -18,7 +18,7 @@ public class HospitalizationBookingRegisterTest {
     @Test
     void testAddBooking() {
         Hospitalization h = HospitalizationFactory.getNewHospitalization("DAILY", Operation.VASECTOMY);
-        hospitalizationBookingRegister.addBooking(h);
+        hospitalizationBookingRegister.add(h);
         assertEquals(1,hospitalizationBookingRegister.getSize());
     }
 
@@ -28,7 +28,7 @@ public class HospitalizationBookingRegisterTest {
             Patient p = new Patient("testName", "testLastname", LocalDate.now(), "testRecidence", "testCf", "testTel","testEmail");
             Hospitalization h = HospitalizationFactory.getNewHospitalization("DAILY", Operation.VASECTOMY);
             h.setPatient(p);
-            hospitalizationBookingRegister.addBooking(h);
+            hospitalizationBookingRegister.add(h);
             boolean risultato = hospitalizationBookingRegister.checkPatient(h.getCode(),p);
             assertTrue(risultato);
         } catch (Exception e) {

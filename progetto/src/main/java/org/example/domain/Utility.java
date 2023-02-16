@@ -55,13 +55,13 @@ public class Utility {
         e.setDoctor(d);
         e.setPatient(p);
         e.setReadyDateToday(Calendar.getInstance());
-        ExamBookingRegister.getInstance().addBooking(e);
+        ExamBookingRegister.getInstance().add(e);
         e=new Exam(ExamType.ELECTROMYOGRAPHY);
         e.setReadyDateToday(Calendar.getInstance());
         e.setDoctor(d);
         e.setPatient(p1);
         e.setCode(1);
-        ExamBookingRegister.getInstance().addBooking(e);
+        ExamBookingRegister.getInstance().add(e);
     }
 
 

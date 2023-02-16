@@ -1,12 +1,12 @@
 package org.example.domain;
 
 import org.example.interfaces.Observer;
+import org.example.interfaces.BookingRegister;
 
 import java.util.*;
 import java.util.List;
-import java.time.*;
 
-public class ExamBookingRegister implements Observer<Exam> {
+public class ExamBookingRegister implements Observer<Exam>, BookingRegister<Exam> {
     private final Map<Integer, Exam> register;
     private static ExamBookingRegister examBookingRegister;
 
@@ -19,11 +19,13 @@ public class ExamBookingRegister implements Observer<Exam> {
     }
     private ExamBookingRegister(){this.register = new HashMap<>();}
 
-    public void addBooking(Exam exam){
+    @Override
+    public void add(Exam exam){
         register.put(exam.getCode(), exam);
         exam.addObserver(this);
     }
 
+    @Override
     public float getRefund(int codice){
         Exam e = register.get(codice);
         Calendar examCalendar = e.getBookingDate();
@@ -38,16 +40,20 @@ public class ExamBookingRegister implements Observer<Exam> {
         }
     }
 
+    @Override
     public void remove(int codice){register.remove(codice);}
 
+    @Override
     public int getSize() { return register.size(); }
 
+    @Override
     public boolean checkPatient(int codice, Patient p){
         Exam e = register.get(codice);
         return e.getPatient().equals(p);
     }
 
-    public Exam getExam(int codice) throws Exception {
+    @Override
+    public Exam getItem(int codice) throws Exception {
         Exam e = register.get(codice);
         if(e != null) {
             return e;

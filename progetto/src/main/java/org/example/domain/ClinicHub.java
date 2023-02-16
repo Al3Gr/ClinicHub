@@ -101,7 +101,7 @@ public class ClinicHub {
             try {
                 Doctor m = doctorRegister.getDoctor();
                 currentHosp.setDoctor(m);
-                hospitalizationBookingRegister.addBooking(currentHosp);
+                hospitalizationBookingRegister.add(currentHosp);
             } catch(Exception e) {
                 System.out.println("Nessun medico presente");
             }
@@ -171,7 +171,7 @@ public class ClinicHub {
                 currentExam.setDoctor(m);
             }
             currentExam.setPatient(currentPatient);
-            examBookingRegister.addBooking(currentExam);
+            examBookingRegister.add(currentExam);
         } else {
             throw new Exception("ordine chiamata dei metodi errato");
         }
@@ -180,7 +180,7 @@ public class ClinicHub {
     public boolean checkBooking(int codice,String tipologia) throws Exception{
         if(tipologia=="ESAME"){
             if(examBookingRegister.checkPatient(codice,currentPatient)){
-                currentExam=examBookingRegister.getExam(codice);
+                currentExam=examBookingRegister.getItem(codice);
                 return true;
             } else {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
@@ -188,7 +188,7 @@ public class ClinicHub {
         }
         else if (tipologia=="RICOVERO") {
             if(hospitalizationBookingRegister.checkPatient(codice,currentPatient)){
-                currentHosp=hospitalizationBookingRegister.getHospitalization(codice);
+                currentHosp=hospitalizationBookingRegister.getItem(codice);
                 return true;
             } else {
                 throw new Exception("Paziente diverso da quello che ha fatto la prenotazione");
@@ -243,7 +243,7 @@ public class ClinicHub {
     }
 
     public void selectExamReady(int code, String info) throws Exception {
-        currentExam = examBookingRegister.getExam(code);
+        currentExam = examBookingRegister.getItem(code);
         currentExam.setState(info);
     }
 

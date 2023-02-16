@@ -1,16 +1,13 @@
 package org.example.domain;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -175,13 +172,13 @@ class ClinicHubTest {
             Exam e = new Exam(ExamType.BLOOD_ANALYSIS);
             e.setCode(1);
             e.setPatient(clinicHub.getCurrentPatient());
-            ExamBookingRegister.getInstance().addBooking(e);
+            ExamBookingRegister.getInstance().add(e);
             clinicHub.checkBooking(1, "ESAME");
             assertNotNull(clinicHub.getCurrentExam());
             Hospitalization hosp = HospitalizationFactory.getNewHospitalization("STANDARD", Operation.VASECTOMY);
             hosp.setCode(1);
             hosp.setPatient(clinicHub.getCurrentPatient());
-            HospitalizationBookingRegister.getInstance().addBooking(hosp);
+            HospitalizationBookingRegister.getInstance().add(hosp);
             clinicHub.checkBooking(1, "RICOVERO");
             assertNotNull(clinicHub.getCurrentHosp());
         } catch (Exception e) {
@@ -285,7 +282,7 @@ class ClinicHubTest {
     void testSelectExamReady() {
         try{
             Utility.loadTodayExams();
-            Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
+            Exam currentExam = ExamBookingRegister.getInstance().getItem(1);
             clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
             assertTrue(currentExam.getState());
             assertNotNull(currentExam.getResult());
@@ -298,7 +295,7 @@ class ClinicHubTest {
     void testSendResultForEmail() {
         try{
             Utility.loadTodayExams();
-            Exam currentExam = ExamBookingRegister.getInstance().getExam(1);
+            Exam currentExam = ExamBookingRegister.getInstance().getItem(1);
             clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
             assertTrue(clinicHub.sendResultForEmail());
         }catch(Exception e){

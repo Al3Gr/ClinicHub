@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +19,7 @@ public class ExamBookingRegisterTest {
     @Test
     void testAddBooking() {
         Exam e = new Exam(ExamType.BLOOD_ANALYSIS);
-        examBookingRegister.addBooking(e);
+        examBookingRegister.add(e);
         assertEquals(1, examBookingRegister.getSize());
     }
 
@@ -30,7 +29,7 @@ public class ExamBookingRegisterTest {
             Patient p = new Patient("testName", "testLastname", LocalDate.now(), "testRecidence", "testCf", "testTel","testEmail");
             Exam e = new Exam(ExamType.BLOOD_ANALYSIS);
             e.setPatient(p);
-            examBookingRegister.addBooking(e);
+            examBookingRegister.add(e);
             boolean risultato = examBookingRegister.checkPatient(e.getCode(),p);
             assertTrue(risultato);
         } catch (Exception e) {
