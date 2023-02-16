@@ -60,7 +60,7 @@ public class Utility {
         e.setReadyDateToday(Calendar.getInstance());
         e.setDoctor(d);
         e.setPatient(p1);
-        e.setCode(1);
+        //e.setCode(2);
         ExamBookingRegister.getInstance().add(e);
     }
 

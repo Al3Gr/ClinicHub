@@ -58,7 +58,7 @@ public class DoctorRegister {
     }
 
     public List<Doctor> getDoctors() {
-        return (List <Doctor>) register.values();
+        return new ArrayList<>( register.values());
     }
 
 }

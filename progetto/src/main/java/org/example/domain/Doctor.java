@@ -79,4 +79,15 @@ public class Doctor {
         final Doctor d = (Doctor) obj;
         return this.cf == d.cf;
     }
+
+    @Override
+    public String toString() {
+        return "Dottore:\n" +
+                "\tnome: " + name + '\n' +
+                "\tcognome: " + lastname + '\n' +
+                "\tbirthday: " + birthday + '\n' +
+                "\tcf: " + cf + '\n' +
+                "\ttelephone: " + telephone + '\n' +
+                "\te_mail: " + e_mail;
+    }
 }

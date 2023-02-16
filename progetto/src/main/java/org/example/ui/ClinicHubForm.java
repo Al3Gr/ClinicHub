@@ -15,6 +15,10 @@ public class ClinicHubForm extends JFrame {
     private JButton btnLoginPatient;
     private JButton addDocButton;
     private JButton resultBtn;
+    private JButton showPatBtn;
+    private JButton showDocBtn;
+    private JButton showHospBtn;
+    private JButton showExamBtn;
 
     public ClinicHubForm(JFrame parent){
         super();
@@ -47,6 +51,34 @@ public class ClinicHubForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new DoctorOperationForm(parent);
+            }
+        });
+
+        showPatBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new showPatientForm(parent);
+            }
+        });
+
+        showDocBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new showDoctorForm(parent);
+            }
+        });
+
+        showHospBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new showHospForm(parent);
+            }
+        });
+
+        showExamBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new showExamForm(parent);
             }
         });
 

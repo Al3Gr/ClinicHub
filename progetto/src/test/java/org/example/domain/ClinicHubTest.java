@@ -264,7 +264,7 @@ class ClinicHubTest {
             clinicHub.confirmCancel("RICOVERO");
             assertEquals(0,HospitalizationBookingRegister.getInstance().getSize());
         }catch(Exception e){
-            fail("Unexpected exception");
+            fail(e);
         }
     }
 
@@ -282,7 +282,7 @@ class ClinicHubTest {
     void testSelectExamReady() {
         try{
             Utility.loadTodayExams();
-            Exam currentExam = ExamBookingRegister.getInstance().getItem(1);
+            Exam currentExam = ExamBookingRegister.getInstance().getItem(2);
             clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
             assertTrue(currentExam.getState());
             assertNotNull(currentExam.getResult());
@@ -299,7 +299,7 @@ class ClinicHubTest {
             clinicHub.selectExamReady(currentExam.getCode(), "esame pronto");
             assertTrue(clinicHub.sendResultForEmail());
         }catch(Exception e){
-            fail("Unexpected exception");
+            fail(e);
         }
     }
 

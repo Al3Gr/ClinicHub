@@ -276,15 +276,15 @@ public class ClinicHub {
     }
 
     public List<Patient> printRegisteredPatients() {
-        return (List<Patient>) patientRegister.values();
+        return new ArrayList<>(patientRegister.values());
     }
 
     public List<Hospitalization> printBookedHospitalizations() {
-        return hospitalizationBookingRegister.getHospitalizations();
+        return hospitalizationBookingRegister.getItems();
     }
 
     public List<Exam> printBookingExams() {
-        return examBookingRegister.getBookedExams();
+        return examBookingRegister.getItems();
     }
 
     public List<Doctor> printMedicalStaff() {

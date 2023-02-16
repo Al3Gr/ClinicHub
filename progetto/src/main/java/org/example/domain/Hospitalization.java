@@ -12,6 +12,8 @@ public abstract class Hospitalization{
     protected Doctor doctor;
     protected Operation op;
 
+    private static int INDEX = 1;
+
     public Patient getPatient() {
         return patient;
     }
@@ -44,19 +46,13 @@ public abstract class Hospitalization{
 
     public Hospitalization(Operation op) {
         this.op = op;
-        this.code = new Random().nextInt();
+        this.code = INDEX++;
     }
 
     @Override
     public String toString() {
-        return "Hospitalization{" +
-                "price=" + price +
-                ", start_date=" + start_date +
-                ", code=" + code +
-                ", end_date=" + end_date +
-                ", patient=" + patient +
-                ", doctor=" + doctor +
-                ", op=" + op +
-                '}';
+        return "Codice: " + code +
+                "\tPaziente: " + patient.getCf() +
+                "\tOperazione: " + op;
     }
 }

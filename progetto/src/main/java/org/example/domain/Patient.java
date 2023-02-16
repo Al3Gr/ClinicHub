@@ -81,15 +81,14 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", birthday=" + birthday +
-                ", residence='" + residence + '\'' +
-                ", cf='" + cf + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", e_mail='" + e_mail + '\'' +
-                '}';
+        return "Paziente:\n" +
+                "\tnome: " + name + '\n' +
+                "\tcognome: " + lastname + '\n' +
+                "\tbirthday: " + birthday + '\n' +
+                "\tresidence: " + residence + '\n' +
+                "\tcf: " + cf + '\n' +
+                "\ttelephone: " + telephone + '\n' +
+                "\te_mail: " + e_mail;
     }
 
     @Override

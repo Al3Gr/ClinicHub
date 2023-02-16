@@ -18,6 +18,8 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     private Result result;
 
+    private static int INDEX = 1;
+
     private boolean stateReady = false;
     private final ExamType type;
 
@@ -58,7 +60,7 @@ public class Exam implements Observable<ExamBookingRegister> {
 
     public Exam(ExamType type){
         this.type=type;
-        this.code= new Random().nextInt();
+        this.code= INDEX++;
         this.price=type.getPrice();
         this.observers = new ArrayList<>();
     }

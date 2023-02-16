@@ -1,10 +1,8 @@
 package org.example.domain;
 
 import org.example.interfaces.BookingRegister;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+
+import java.util.*;
 
 public class HospitalizationBookingRegister implements BookingRegister<Hospitalization> {
     private final Map<Integer, Hospitalization> register;
@@ -62,7 +60,8 @@ public class HospitalizationBookingRegister implements BookingRegister<Hospitali
         }
     }
 
-    public List<Hospitalization> getHospitalizations() {
-        return (List<Hospitalization>) register.values();
+    @Override
+    public List<Hospitalization> getItems() {
+        return new ArrayList<>(register.values());
     }
 }
