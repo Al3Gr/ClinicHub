@@ -275,4 +275,20 @@ public class ClinicHub {
         }
     }
 
+    public List<Patient> printRegisteredPatients() {
+        return (List<Patient>) patientRegister.values();
+    }
+
+    public List<Hospitalization> printBookedHospitalizations() {
+        return hospitalizationBookingRegister.getHospitalizations();
+    }
+
+    public List<Exam> printBookingExams() {
+        return examBookingRegister.getBookedExams();
+    }
+
+    public List<Doctor> printMedicalStaff() {
+        return doctorRegister.getDoctors();
+    }
+
 }

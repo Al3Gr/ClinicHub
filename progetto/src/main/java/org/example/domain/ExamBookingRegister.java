@@ -78,6 +78,8 @@ public class ExamBookingRegister implements Observer<Exam>, BookingRegister<Exam
         register.remove(observable.getCode());
     }
 
-
+    public List<Exam> getBookedExams() {
+        return (List <Exam>) register.values();
+    }
 
 }

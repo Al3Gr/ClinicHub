@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.List;
 
 public class DoctorRegister {
 
@@ -25,8 +26,7 @@ public class DoctorRegister {
     public Doctor getDoctor() throws Exception {
         if (register.size() > 0) {
             int i = new Random().nextInt(register.size());
-            Doctor doc = new ArrayList<>(register.values()).get(i);
-            return doc;
+            return new ArrayList<>(register.values()).get(i);
         } else {
             throw new Exception("Nessun dottore presente");
         }
@@ -55,6 +55,10 @@ public class DoctorRegister {
         } else {
             throw new Exception("Nessun dottore presente con quel codice fiscale");
         }
+    }
+
+    public List<Doctor> getDoctors() {
+        return (List <Doctor>) register.values();
     }
 
 }

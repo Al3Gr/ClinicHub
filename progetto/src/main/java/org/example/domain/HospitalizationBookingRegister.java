@@ -1,10 +1,10 @@
 package org.example.domain;
 
 import org.example.interfaces.BookingRegister;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 public class HospitalizationBookingRegister implements BookingRegister<Hospitalization> {
     private final Map<Integer, Hospitalization> register;
@@ -60,5 +60,9 @@ public class HospitalizationBookingRegister implements BookingRegister<Hospitali
         } else {
             throw new Exception("Nessun esame presente con quel codice");
         }
+    }
+
+    public List<Hospitalization> getHospitalizations() {
+        return (List<Hospitalization>) register.values();
     }
 }
