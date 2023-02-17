@@ -128,6 +128,7 @@ public class PatientOperationForm extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(clinicHub.getCurrentPatient() != null){
                     try {
+                        //testFrame();
                         deleteBookingFrame();
                     } catch (Exception ex) {
                         System.out.println(ex);
@@ -436,6 +437,66 @@ public class PatientOperationForm extends JFrame{
         frame.setVisible(true);
     }
 
+    private void testFrame(){
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(500, 200));
+        frame.setTitle("Cancella Prenotazione");
+
+        Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);
+
+        JPanel m_panel = new JPanel(new GridLayout(5, 1));
+        m_panel.setBorder(padding);
+
+        JPanel bookingCodePanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel codelabel = new JLabel("Codice prenotazione:", SwingConstants.LEFT);
+        codelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JTextField codeField = new JTextField();
+
+        bookingCodePanel.add(codelabel);
+        bookingCodePanel.add(codeField);
+
+        JPanel typeBookingPanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel typelabel = new JLabel("Tipo prenotazione:", SwingConstants.LEFT);
+        typelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JPanel typeBookingButtonPanel = new JPanel(new GridLayout(1, 2));
+        ButtonGroup g = new ButtonGroup();
+        JRadioButton ricoveroButton = new JRadioButton("RICOVERO");
+        JRadioButton esameButton = new JRadioButton("ESAME");
+        g.add(ricoveroButton);
+        g.add(esameButton);
+        typeBookingButtonPanel.add(ricoveroButton);
+        typeBookingButtonPanel.add(esameButton);
+
+        JButton searchButton = new JButton("Cerca prenotazione");
+
+        JPanel refundPanel = new JPanel(new GridLayout(1, 2));
+
+        JLabel refundlabel = new JLabel("Rimborso dovuto:", SwingConstants.LEFT);
+        refundlabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+
+        JLabel refundlabel_info = new JLabel("", SwingConstants.LEFT);
+        //setVisible(false);
+
+        refundPanel.add(refundlabel);
+        refundPanel.add(refundlabel_info);
+
+        typeBookingPanel.add(typelabel);
+        typeBookingPanel.add(typeBookingButtonPanel);
+
+        m_panel.add(bookingCodePanel);
+        m_panel.add(typeBookingPanel);
+        m_panel.add(searchButton);
+        m_panel.add(refundPanel);
+
+        frame.add(m_panel);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
     private void deleteBookingFrame(){
         JFrame frame = new JFrame();
         frame.setMinimumSize(new Dimension(500, 200));
@@ -481,10 +542,9 @@ public class PatientOperationForm extends JFrame{
         JPanel refundPanel = new JPanel(new GridLayout(1, 2));
 
         JLabel refundlabel = new JLabel("Rimborso dovuto:", SwingConstants.LEFT);
-        codelabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        refundlabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
 
         JLabel refundlabel_info = new JLabel("", SwingConstants.LEFT);
-        setVisible(false);
 
         refundPanel.add(refundlabel);
         refundPanel.add(refundlabel_info);
