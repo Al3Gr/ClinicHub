@@ -100,9 +100,9 @@ public class PatientOperationForm extends JFrame{
                 try {
                     ArrayList<Date> dates = null;
                     if(dailyButton.isSelected()) {
-                        dates = (ArrayList<Date>) clinicHub.newHospitalization("DAILY", (Operation) operationCombo.getSelectedItem());
+                        dates = (ArrayList<Date>) clinicHub.newHospitalizationBooking("DAILY", (Operation) operationCombo.getSelectedItem());
                     } else if(standardButton.isSelected()) {
-                        dates = (ArrayList<Date>) clinicHub.newHospitalization("STANDARD", (Operation) operationCombo.getSelectedItem());
+                        dates = (ArrayList<Date>) clinicHub.newHospitalizationBooking("STANDARD", (Operation) operationCombo.getSelectedItem());
                     }
                     confirmHospFrame(dates);
                 } catch (Exception ex) {
@@ -192,7 +192,7 @@ public class PatientOperationForm extends JFrame{
                 try {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime((Date) datesCombo.getSelectedItem());
-                    clinicHub.chooseHospitalization(cal);
+                    clinicHub.chooseHospitalizationDate(cal);
                     endlabel_info.setText(formatDate.format(clinicHub.getCurrentHosp().getEnd_date().getTime()));
                     pricelabel_info.setText(String.valueOf(clinicHub.showPrice()));
                     pricelabel_info.setVisible(true);
@@ -218,7 +218,7 @@ public class PatientOperationForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    clinicHub.confirmHospitalization();
+                    clinicHub.confirmHospitalizationBooking();
                     System.out.println(clinicHub.getCurrentHosp().getCode());
                     frame.dispose();
                 } catch (Exception ex) {
@@ -410,7 +410,7 @@ public class PatientOperationForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    clinicHub.confirmBooking();
+                    clinicHub.confirmExamBooking();
                     System.out.println(clinicHub.getCurrentExam().getCode());
                     frame.dispose();
                 } catch (Exception ex) {

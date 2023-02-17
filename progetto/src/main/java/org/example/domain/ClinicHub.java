@@ -68,8 +68,7 @@ public class ClinicHub {
         }
     }
 
-    //Refactoring in newHospitalizationBooking
-    public List<Date> newHospitalization(String mode, Operation operation) throws Exception {
+    public List<Date> newHospitalizationBooking(String mode, Operation operation) throws Exception {
         if(currentPatient != null){
             currentHosp = HospitalizationFactory.getNewHospitalization(mode, operation);
             return Utility.getDates();
@@ -79,8 +78,7 @@ public class ClinicHub {
 
     }
 
-    //Refactoring in chooseHospitalizationDate
-    public void chooseHospitalization(Calendar start_date) throws Exception {
+    public void chooseHospitalizationDate(Calendar start_date) throws Exception {
         if(currentHosp != null) {
             currentHosp.setData(start_date);
         } else {
@@ -96,8 +94,7 @@ public class ClinicHub {
         }
     }
 
-    //Refactoring in confirmHospitalizationBooking
-    public void confirmHospitalization() throws Exception {
+    public void confirmHospitalizationBooking() throws Exception {
         if (currentHosp != null && currentPatient != null) {
             currentHosp.setPatient(currentPatient);
             try {
@@ -165,8 +162,7 @@ public class ClinicHub {
 
     public float showExamPrice(){ return currentExam.getPrice();}
 
-    //Refactoring in confirmExamBooking
-    public void confirmBooking() throws Exception{
+    public void confirmExamBooking() throws Exception{
         if(currentPatient != null) {
             if (currentExam.getDoctor() == null) {
                 Doctor m = doctorRegister.getDoctor();

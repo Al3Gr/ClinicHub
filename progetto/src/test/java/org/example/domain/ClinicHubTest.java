@@ -55,7 +55,7 @@ class ClinicHubTest {
     void testNewHospitalization() {
         try{
             clinicHub.loginPatient("cf2");
-            ArrayList<Date> dates = (ArrayList<Date>) clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
+            ArrayList<Date> dates = (ArrayList<Date>) clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
             assertNotNull(clinicHub.getCurrentHosp());
             assertEquals(31,dates.size());
         } catch (Exception e) {
@@ -68,8 +68,8 @@ class ClinicHubTest {
     void testChooseHospitalization() {
         try {
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(Calendar.getInstance());
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
             assertEquals(Calendar.getInstance(), clinicHub.getCurrentHosp().getStart_date());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -80,11 +80,11 @@ class ClinicHubTest {
     void testShowPrice() {
         try{
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(Calendar.getInstance());
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
             assertEquals(100, clinicHub.showPrice());
-            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(Calendar.getInstance());
+            clinicHub.newHospitalizationBooking("STANDARD", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
             assertEquals(400, clinicHub.showPrice());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -95,8 +95,8 @@ class ClinicHubTest {
     void testConfirmHospitalization() {
         try{
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.confirmHospitalization();
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.confirmHospitalizationBooking();
             assertEquals(1, HospitalizationBookingRegister.getInstance().getSize());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -158,7 +158,7 @@ class ClinicHubTest {
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
             clinicHub.chooseExamDate(Calendar.getInstance());
             clinicHub.chooseExamTime(LocalTime.now());
-            clinicHub.confirmBooking();
+            clinicHub.confirmExamBooking();
             assertEquals(1, ExamBookingRegister.getInstance().getSize());
         } catch (Exception e) {
             fail("Unexpected exception");
@@ -196,40 +196,40 @@ class ClinicHubTest {
             clinicHub.loginPatient("cf2");
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
             clinicHub.chooseExamDate(c1);
-            clinicHub.confirmBooking();
+            clinicHub.confirmExamBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), clinicHub.getCurrentExam().getPrice());
             Calendar c2 = Calendar.getInstance();
             c2.add(Calendar.DAY_OF_MONTH, 3);
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
             clinicHub.chooseExamDate(c2);
-            clinicHub.confirmBooking();
+            clinicHub.confirmExamBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), 0.5 * clinicHub.getCurrentExam().getPrice());
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
             clinicHub.chooseExamDate(Calendar.getInstance());
-            clinicHub.confirmBooking();
+            clinicHub.confirmExamBooking();
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(), "ESAME");
             assertEquals(clinicHub.calculateRefund("ESAME"), 0);
 
             // TEST REFUND RICOVERO
             Calendar c3 = Calendar.getInstance();
             c3.add(Calendar.DAY_OF_MONTH, 8);
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(c3);
-            clinicHub.confirmHospitalization();
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(c3);
+            clinicHub.confirmHospitalizationBooking();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.5 * clinicHub.getCurrentHosp().getPrice());
             Calendar c4 = Calendar.getInstance();
             c4.add(Calendar.DAY_OF_MONTH, 4);
-            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(c4);
-            clinicHub.confirmHospitalization();
+            clinicHub.newHospitalizationBooking("STANDARD", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(c4);
+            clinicHub.confirmHospitalizationBooking();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0.2 * clinicHub.getCurrentHosp().getPrice());
-            clinicHub.newHospitalization("STANDARD", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(Calendar.getInstance());
-            clinicHub.confirmHospitalization();
+            clinicHub.newHospitalizationBooking("STANDARD", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
+            clinicHub.confirmHospitalizationBooking();
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(), "RICOVERO");
             assertEquals(clinicHub.calculateRefund("RICOVERO"), 0);
 
@@ -245,7 +245,7 @@ class ClinicHubTest {
             clinicHub.newExamBooking(ExamType.BLOOD_ANALYSIS);
             clinicHub.chooseExamDate(Calendar.getInstance());
             clinicHub.chooseExamTime(LocalTime.now());
-            clinicHub.confirmBooking();
+            clinicHub.confirmExamBooking();
 
             clinicHub.loginPatient("cf2");
             clinicHub.checkBooking(clinicHub.getCurrentExam().getCode(),"ESAME");
@@ -254,9 +254,9 @@ class ClinicHubTest {
             assertEquals(0,ExamBookingRegister.getInstance().getSize());
 
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalization("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalization(Calendar.getInstance());
-            clinicHub.confirmHospitalization();
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
+            clinicHub.confirmHospitalizationBooking();
 
             clinicHub.loginPatient("cf2");
             clinicHub.checkBooking(clinicHub.getCurrentHosp().getCode(),"RICOVERO");
