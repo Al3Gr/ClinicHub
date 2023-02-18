@@ -50,6 +50,7 @@ public class DoctorRegisterTest {
             Doctor d3 = new Doctor("Giovanni", "Fr", LocalDate.now(), "cf4", "gio.fr@gmail.com", "3298888555");
             doctorRegister.addDoctor(d3);
             assertNotNull(doctorRegister.getDoctorByCf("cf4"));
+            assertEquals(d3, doctorRegister.getDoctorByCf("cf4"));
         } catch(Exception e) {
             fail("Unexpected exception");
         }
