@@ -305,9 +305,13 @@ class ClinicHubTest {
 
     @Test
     void testAddDoctor() {
-        boolean result = clinicHub.addDoctor("Carlo","Bianchi", LocalDate.now(), "cf55", "3333333333", "cb@gmail.com");
-        assertTrue(result);
-        assertNotNull(clinicHub.getCurrentDoctor());
+        try {
+            boolean result = clinicHub.addDoctor("Carlo", "Bianchi", LocalDate.now(), "cf55", "3333333333", "cb@gmail.com");
+            assertTrue(result);
+            assertNotNull(clinicHub.getCurrentDoctor());
+        } catch(Exception e) {
+            fail(e);
+        }
     }
 
     @Test
