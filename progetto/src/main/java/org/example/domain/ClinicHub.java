@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.interfaces.EmailService;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -15,6 +17,8 @@ public class ClinicHub {
     private final DoctorRegister doctorRegister;
     private final ExamBookingRegister examBookingRegister;
     private final HospitalizationBookingRegister hospitalizationBookingRegister;
+
+    private final EmailService emailService;
 
     public Map<String, Patient> getPatientRegister() {
         return patientRegister;
@@ -114,6 +118,7 @@ public class ClinicHub {
         this.doctorRegister = DoctorRegister.getInstance();
         this.hospitalizationBookingRegister = HospitalizationBookingRegister.getInstance();
         this.examBookingRegister=ExamBookingRegister.getInstance();
+        this.emailService = new EmailServiceImplementation();
         Utility.loadDoctor();
         Utility.loadTodayExams();
     }
@@ -247,7 +252,7 @@ public class ClinicHub {
 
     public boolean sendResultForEmail() throws Exception{
         if (currentExam != null) {
-            return EmailService.sendResult(currentExam, currentExam.getResultInfo());
+            return emailService.sendResult(currentExam, currentExam.getResultInfo());
         } else {
             throw new Exception("Ordine di chiamata dei metodi non rispettato");
 

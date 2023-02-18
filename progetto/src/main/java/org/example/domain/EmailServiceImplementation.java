@@ -1,11 +1,14 @@
 package org.example.domain;
 
+import org.example.interfaces.EmailService;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class  EmailService {
+public class EmailServiceImplementation implements EmailService {
 
-    public static boolean sendResult(Exam e, String info) {
+
+    public  boolean sendResult(Exam e, String info) {
         String filename= e.getPatient().getLastname() + "_" + e.getPatient().getName() + ".txt";
         String content = "Codice esame: " + e.getCode() + "\nCodice fiscale: " + e.getPatient().getCf() + "\nInformazioni: " + info;
         try {
@@ -17,4 +20,6 @@ public class  EmailService {
         }
         return true;
     }
+
+
 }
