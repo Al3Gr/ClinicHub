@@ -68,9 +68,12 @@ class ClinicHubTest {
     void testChooseHospitalization() {
         try {
             clinicHub.loginPatient("cf2");
-            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
-            clinicHub.chooseHospitalizationDate(Calendar.getInstance());
-            assertEquals(Calendar.getInstance(), clinicHub.getCurrentHosp().getStart_date());
+            clinicHub.newHospitalizationBooking("STANDARD", Operation.VASECTOMY);
+            Calendar data = Calendar.getInstance();
+            clinicHub.chooseHospitalizationDate(data);
+            assertEquals(data, clinicHub.getCurrentHosp().getStart_date());
+            data.add(Calendar.DAY_OF_MONTH, Operation.VASECTOMY.getConvalescence());
+            assertEquals(data, clinicHub.getCurrentHosp().getEnd_date());
         } catch (Exception e) {
             fail("Unexpected exception");
         }
