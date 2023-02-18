@@ -55,11 +55,11 @@ class ClinicHubTest {
     void testNewHospitalization() {
         try{
             clinicHub.loginPatient("cf2");
-            ArrayList<Date> dates = (ArrayList<Date>) clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
+            clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
             assertNotNull(clinicHub.getCurrentHosp());
-            assertEquals(31,dates.size());
+            assertEquals(H_Daily.class,clinicHub.getCurrentHosp().getClass());
         } catch (Exception e) {
-            fail("Unexpected exception");
+            fail(e);
         }
 
     }
