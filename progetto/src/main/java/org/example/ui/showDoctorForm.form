@@ -14,7 +14,7 @@
         </constraints>
         <properties>
           <font name="Arial Rounded MT Bold" size="22" style="1"/>
-          <text value="Visualliza dottori"/>
+          <text value="Visualizza dottori"/>
         </properties>
       </component>
       <vspacer id="b8cdf">
