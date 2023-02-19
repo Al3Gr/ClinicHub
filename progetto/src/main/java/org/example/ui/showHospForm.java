@@ -14,7 +14,7 @@ public class showHospForm extends JFrame{
         clinicHub = ClinicHub.getInstance();
         setTitle("ClinicHub");
         setContentPane(mainPanel);
-        setMinimumSize(new Dimension(800, 720));
+        setMinimumSize(new Dimension(400, 720));
 
         mainPanel.setLayout(new FlowLayout());
         JList list = new JList(clinicHub.printBookedHospitalizations().toArray());

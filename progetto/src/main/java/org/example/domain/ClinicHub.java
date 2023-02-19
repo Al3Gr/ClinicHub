@@ -90,7 +90,7 @@ public class ClinicHub {
         }
     }
 
-    public float showPrice() throws Exception {
+    public float showHospPrice() throws Exception {
         if (currentHosp != null) {
             return currentHosp.getPrice();
         } else {

@@ -194,7 +194,7 @@ public class PatientOperationForm extends JFrame{
                     cal.setTime((Date) datesCombo.getSelectedItem());
                     clinicHub.chooseHospitalizationDate(cal);
                     endlabel_info.setText(formatDate.format(clinicHub.getCurrentHosp().getEnd_date().getTime()));
-                    pricelabel_info.setText(String.valueOf(clinicHub.showPrice()));
+                    pricelabel_info.setText(String.valueOf(clinicHub.showHospPrice()));
                     pricelabel_info.setVisible(true);
                     endlabel_info.setVisible(true);
                     confirmButton.setVisible(true);

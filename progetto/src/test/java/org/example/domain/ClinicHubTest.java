@@ -85,10 +85,10 @@ class ClinicHubTest {
             clinicHub.loginPatient("cf2");
             clinicHub.newHospitalizationBooking("DAILY", Operation.VASECTOMY);
             clinicHub.chooseHospitalizationDate(Calendar.getInstance());
-            assertEquals(100, clinicHub.showPrice());
+            assertEquals(100, clinicHub.showHospPrice());
             clinicHub.newHospitalizationBooking("STANDARD", Operation.VASECTOMY);
             clinicHub.chooseHospitalizationDate(Calendar.getInstance());
-            assertEquals(400, clinicHub.showPrice());
+            assertEquals(400, clinicHub.showHospPrice());
         } catch (Exception e) {
             fail("Unexpected exception");
         }
